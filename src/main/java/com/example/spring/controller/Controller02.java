@@ -11,11 +11,13 @@ import org.springframework.web.context.request.async.StandardServletAsyncWebRequ
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Objects;
 
 @Controller
 public class Controller02 {
 
+    /*
+     * (1) @RequestMapping - params 1개
+     * */
     // /main2/sub1?name
     @RequestMapping(value = "/main2/sub1", params = "name")
     public void sub1(WebRequest request) {
@@ -25,17 +27,20 @@ public class Controller02 {
         System.out.println("Controller02.sub1");
     }
 
+    /*
+     * (2) @RequestMapping - params 2개이상
+     * */
     // /main2/sub2?name&address
     //            ?{Query-String}
     // Query-String: name1=value1&name2=value2
     @RequestMapping(value = "/main2/sub1", params = {"name", "address"})
     public void sub2(WebRequest request) {
-        // header 정보
-        request.getHeader("User-Agent");
-
         System.out.println("Controller02.sub2");
     }
 
+    /*
+     * (3) @RequestMapping - 동일한 path + 다른 params으로 서로 다른 Method 실행
+     * */
     // /main2/sub3?name=musk
     @RequestMapping(value = "/main2/sub3", params = "name")
     public void sub3(WebRequest request) {
@@ -45,9 +50,9 @@ public class Controller02 {
         System.out.println("Controller02.sub3");
     }
 
-    // /main2/sub4?address=seoul
-    // /main2/sub4?address=jeju
-    @RequestMapping(value = "/main2/sub4", params = "address")
+    // /main2/sub3?address=seoul
+    // /main2/sub3?address=jeju
+    @RequestMapping(value = "/main2/sub3", params = "address")
     public void sub4(WebRequest request) {
         String address = request.getParameter("address");
         System.out.println("address = " + address);
@@ -55,7 +60,10 @@ public class Controller02 {
         System.out.println("Controller02.sub4");
     }
 
-    // @RequestParam : 해당 이름의 request parameter를 method parameter에 binding
+    /*
+     * (4) @RequestParam
+     * */
+    // @RequestParam({REQUEST-PARAM} {VARIABLE}) : 해당 이름의 request parameter를 method parameter에 binding
     // /main2/sub5?email=gmail
     @RequestMapping(value = "/main2/sub5", params = "email")
     public void sub5(@RequestParam("email") String str) {
@@ -70,6 +78,9 @@ public class Controller02 {
         System.out.println("v = " + v);
     }
 
+    /*
+     * (5) @RequestParam - @RequestMapping (params 생략)
+     * */
     // /main2/sub7?email=yahoo&age=55
     @RequestMapping(value = "/main2/sub7")
     public void sub7(@RequestParam("email") String str,
@@ -98,6 +109,9 @@ public class Controller02 {
         System.out.println("i = " + i);
     }
 
+    /*
+     * (6) @RequestParam - ParamType 자동형변환
+     * */
     // String -> int 자동형변환
     // /main2/sub10?city=seoul&age=44
     @RequestMapping(value = "/main2/sub10")
@@ -107,6 +121,9 @@ public class Controller02 {
         System.out.println("age = " + age);
     }
 
+    /*
+     * (7) @RequestParam - (value) 생략
+     * */
     // request parameter의 이름이 method parameter와 같으면
     // @RequestParam의 value 속성을 생략 가능
     // /main2/sub11?city=seoul&age=44
@@ -117,6 +134,9 @@ public class Controller02 {
         System.out.println("age = " + age);
     }
 
+    /*
+     * (8) @RequestParam - 조건부 생략 (기본타입 + Array) / 생략불가(List, Map, ..)
+     * */
     // request parameter의 이름이 method parameter와 같으면
     // @RequestParam의 value 속성을 생략 가능
     // + @RequestParam 생략 가능
@@ -127,7 +147,9 @@ public class Controller02 {
         System.out.println("age = " + age);
     }
 
-
+    /*
+     * (9) @RequestParam - 파라미터 필수값(required=true)
+     * */
     // /main2/sub13?email=gmail&score=88.8&married=true
     // /main2/sub13?score=88.8&married=true
     // @RequestParam이 명시된 파라미터는 url에 포함하지 않으면 null로 반환
@@ -138,7 +160,9 @@ public class Controller02 {
         System.out.println("married = " + married);
     }
 
-
+    /*
+     * (10) @RequestParam - 파라미터 미포함(required=false)
+     * */
     // /main2/sub14?email=gmail&score=88.8&married=true
     // /main2/sub14?score=88.8&married=true
     // @RequestParam이 명시된 파라미터는 url에 반드시 포함해야한다(포함하지 않으면 Error)
@@ -151,6 +175,9 @@ public class Controller02 {
         System.out.println("married = " + married);
     }
 
+    /*
+     * (11) @RequestParam - 기본값 부여 (required=false, defaultValue="")
+     * */
     // 파라미터 값이 존재하지 않을 때 기본 값을 부여할 수 있다.
     @RequestMapping(value = "/main2/sub15")
     public void sub15(@RequestParam(required = false, defaultValue = "") String email,
@@ -161,6 +188,9 @@ public class Controller02 {
         System.out.println("married = " + married);
     }
 
+    /*
+     * (12) @RequestParam - 기본값 부여 시, required=false 생략
+     * */
     // 파라미터 값이 존재하지 않을 때 기본 값을 부여할 수 있다. 기본값을 부여하면 required=false 생략 가능
     @RequestMapping(value = "/main2/sub16")
     public void sub16(@RequestParam(defaultValue = "") String email,
@@ -185,6 +215,9 @@ public class Controller02 {
         System.out.println("age = " + age);
     }
 
+    /*
+     * (13) @RequestParam - 요청 파라미터의 여러 값 (Array, List)
+     * */
     // 하나의 Request Parameter(요청 파라미터, 요청 변수)가 여러값인 경우
     // /main2/sub18?city=seoul&city=jeju&city=busan
     // /main2/sub18?city=seoul&city=jeju
@@ -225,6 +258,9 @@ public class Controller02 {
         System.out.println("married = " + married);
     }
 
+    /*
+     * (14) @RequestParam - 요청 파라미터의 여러 값 (Map, MultiValueMap)
+     * */
     // /main2/sub21?city=서울&email=gmail&address=신촌&age=88&score=98&married=true
     @RequestMapping("/main2/sub22")
     public void method22(@RequestParam Map<String, Object> params) {
@@ -241,19 +277,27 @@ public class Controller02 {
         }
     }
 
-    // Request 요청정보 얻기
+    /*
+     * (15) WebRequest 요청정보
+     * */
+    // Request 요청정보 얻기 (method, servletPath)
     @RequestMapping("/main2/sub24")
     public void method24(WebRequest request) {
         Class<? extends WebRequest> clazz = request.getClass();
         if (request instanceof StandardServletAsyncWebRequest b) {
             Object c = b.getNativeRequest();
             System.out.println("c.getClass() = " + c.getClass());
+            //c.getClass() = class org.apache.catalina.connector.RequestFacade
             if (c instanceof RequestFacade d) {
                 String method = d.getMethod();
-
-
+                String servletPath = d.getServletPath();
+                System.out.println("method = " + method);
+                //method = GET
+                System.out.println("servletPath = " + servletPath);
+                //servletPath = /main2/sub24
             }
         }
         System.out.println("clazz = " + clazz);
+        //clazz = class org.springframework.web.context.request.async.StandardServletAsyncWebRequest
     }
 }
