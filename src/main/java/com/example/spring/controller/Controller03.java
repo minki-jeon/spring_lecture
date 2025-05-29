@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
 import java.util.Map;
 
 @Controller
@@ -103,5 +104,21 @@ public class Controller03 {
     @RequestMapping("sub11")
     public void sub11(MyBean037 params) {
         System.out.println(params);
+    }
+
+    /*
+     * (6) 동일한 파라미터의 여러 값
+     */
+    // /main3/sub12?name=donald&age=66&skill=work&skill=baseball&skill=java&skill=css
+    @RequestMapping("sub12")
+    public void sub12(MyBean0310 params) {
+        System.out.println(params);
+    }
+
+    // /main3/sub13?hobby=cook&hobby=walk&hobby=running&score=3.3&score=4.4&score=5.5
+    @RequestMapping("sub13")
+    public void sub13(MyBean0311 params, Double[] score) {
+        System.out.println(params);
+        System.out.println(Arrays.toString(score));
     }
 }
