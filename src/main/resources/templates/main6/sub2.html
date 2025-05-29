@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Set</h1>
+<h2 th:each="set : ${mySet}" th:text="${set}">Lorem.</h2>
+
+<hr>
+
+<h1>List</h1>
+<h2 th:each="li : ${aiList}" th:text="${li}">Lorem.</h2>
+
+<hr>
+
+<h2 th:each="li : ${aiList}">
+    <span th:text="${li}"> 여기는 span </span>
+</h2>
+
+</body>
+</html>
