@@ -1,6 +1,7 @@
 package com.example.spring.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -72,5 +73,43 @@ public class Controller04 {
     public String sub4() {
 
         return "main4/sub4";
+    }
+
+    /*
+     * (2) Model : 요청 처리의 결과를 받는다(저장)
+     */
+    @RequestMapping("sub5")
+    public String sub5(Model model) {
+        // 1. 요청 분석/가공
+        // 2. 요청 처리(business logic)
+        // 3. 결과를 model에 담기
+        model.addAttribute("name1", "결과 값1");
+        model.addAttribute("name2", "결과 값2");
+        // 4. view로 forwarding
+        return "main4/sub5";
+    }
+
+    @RequestMapping("sub6")
+    public String sub6(Model model) {
+        // model attribute : model에 넣은 값(객체)
+        model.addAttribute("name", "donald");
+        model.addAttribute("address", "la");
+        model.addAttribute("email", "gmail");
+        return "main4/sub6";
+    }
+
+    @RequestMapping("sub7")
+    public String sub7(Model model) {
+        model.addAttribute("age", "55");
+        model.addAttribute("score", "97.54");
+        model.addAttribute("school", "서울대");
+        model.addAttribute("city", "신림동");
+        return "main4/sub7";
+    }
+
+    @RequestMapping("sub8")
+    public String sub8(Model model) {
+        model.addAttribute("number", "1234567");
+        return "main4/sub8";
     }
 }
