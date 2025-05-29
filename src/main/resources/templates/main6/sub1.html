@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>List</h1>
+<h2 th:text="${list[0]}">Lorem.</h2>
+<h2 th:text="${list[1]}">Facilis.</h2>
+<h2 th:text="${list[2]}">Sint!</h2>
+
+<hr>
+<h1>Set</h1>
+<h2 th:text="${cars[0]}">Lorem.</h2>
+<h2 th:text="${cars[1]}">Suscipit!</h2>
+<h2 th:text="${cars[2]}">Aliquam?</h2>
+
+<hr>
+<!-- 반복 th:each -->
+<h1>Set each 사용</h1>
+<h2 th:each="car : ${cars}" th:text="${car}">Lorem.</h2>
+
+<hr>
+<!-- 반복 th:each -->
+<h1>List each 사용</h1>
+<h2 th:each="item : ${list}" th:text="${item}">Lorem.</h2>
+
+</body>
+</html>
