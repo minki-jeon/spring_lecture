@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="${attr}">Lorem.</h1>
+<hr>
+<h1 th:text="${attr.name}">Lorem.</h1>
+<h1 th:text="${attr.age}">Est.</h1>
+<h1 th:text="${attr.address}">Nam!</h1>
+<!--<h1 th:text="${attr.1 my info}">Lorem.</h1>-->
+<hr>
+<h1 th:text="${attr['name']}">Lorem.</h1>
+<h1 th:text="${attr['age']}">Nulla.</h1>
+<h1 th:text="${attr['address']}">Similique?</h1>
+<h1 th:text="${attr['1 my info']}">Lorem.</h1>
+</body>
+</html>
