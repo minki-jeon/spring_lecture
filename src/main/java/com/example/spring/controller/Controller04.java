@@ -82,7 +82,7 @@ public class Controller04 {
     public String sub5(Model model) {
         // 1. 요청 분석/가공
         // 2. 요청 처리(business logic)
-        // 3. 결과를 model에 담기
+        // 3. 결과 Attribute를 model에 담기
         model.addAttribute("name1", "결과 값1");
         model.addAttribute("name2", "결과 값2");
         // 4. view로 forwarding
