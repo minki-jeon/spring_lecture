@@ -1,8 +1,6 @@
 package com.example.spring.controller;
 
-import com.example.spring.dto.MyBean031;
-import com.example.spring.dto.MyBean032;
-import com.example.spring.dto.MyBean033;
+import com.example.spring.dto.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,5 +81,27 @@ public class Controller03 {
         System.out.println(params);
     }
 
+    // /main3/sub9/address=seoul&salary=50.5
+    @RequestMapping("sub9")
+    public void sub9(MyBean035 params) {
+        System.out.println(params);
+    }
 
+    // /main3/sub10?age=44&email=gmail&married=true&salary=40.4&name=donald
+    // [ Request Handler Method ]
+    @RequestMapping("sub10")
+    public void sub10(MyBean036 params) {
+        System.out.println(params);
+    }
+
+    /*
+     * (5) DTO Property와 Field의 이름이 다른 경우
+     */
+    // request parameter와 같은 이름의 setter 메소드를 사용
+    // /main3/sub11?name=donald&address=ny&pw=1234          // pw=null
+    // /main3/sub11?name=donald&address=ny&password=5678    // pw=5678
+    @RequestMapping("sub11")
+    public void sub11(MyBean037 params) {
+        System.out.println(params);
+    }
 }
