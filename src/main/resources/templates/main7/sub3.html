@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* css 주석 */
+    </style>
+</head>
+<body>
+<!-- html 주석 -->
+<!-- 중요한 내용 작성하면 안됨 (개발자 도구에서 주석 확인 가능) -->
+
+<!--<h1 th:text="${'hello'}">text</h1>-->
+
+<!--/*--> thymeleaf 주석 : Client 랜더링(Rendering) 할 때 제거된다. <!--*/-->
+<!--/* thymeleaf + HTML 주석 */-->
+<!--/*<h1 th:text="${'hello'}">text</h1>*/-->
+<ul>
+    <li th:each="item : ${myList}" th:text="${item}">some item1</li>
+    <!--/*-->
+    <!-- Thymeleaf만 주석 처리되므로, 랜더링될 때만 주석 영역이 제거된다. -->
+    <li>some item2</li>
+    <li>some item3</li>
+    <li>some item4</li>
+    <!--*/-->
+</ul>
+
+<script>
+    // js 주석
+    /*
+    js 여러 줄 주석
+     */
+</script>
+</body>
+</html>
