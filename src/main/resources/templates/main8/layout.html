@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="page-head(title, style)">
+<!-- th:fragment="FRAGMENT-NAME(ARGUMENTS)" 코드 조각으로 값 전달 받기  -->
+    <meta charset="UTF-8">
+    <title th:text="${title}">Title</title>
+    <th:block th:replace="${style}"/>
+</head>
+<body>
+<!-- th:fragment="FRAGMENT-NAME" 코드조각에 이름 붙이기 -->
+<div th:fragment="navbar">
+    <a th:href="@{/main8/sub5}" style="color: skyblue">To sub5</a>
+    <a th:href="@{/main8/sub6}" style="color: skyblue">To sub6</a>
+</div>
+<h1>layout</h1>
+
+<!-- th:fragment="FRAGMENT-NAME(ARGUMENTS)" 코드 조각으로 값 전달 받기  -->
+<div th:fragment="side-bar(var1)">
+    <div th:text="${var1}"> </div>
+</div>
+
+<div style="display: flex" th:fragment="footer">
+    <div style="flex: 1; text-align: center">
+        about
+    </div>
+    <div style="flex: 1; text-align: center">
+        price
+    </div>
+</div>
+
+</body>
+</html>
