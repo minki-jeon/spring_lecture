@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .italic {
+            font-style: italic;
+        }
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<!-- 가격은 이태릭체(italic), 5000이상 굵게(bold) 처리 th:classappend 활용 -->
+<table>
+    <thead>
+    <tr>
+        <th>이름</th>
+        <th>생일</th>
+        <th>가격</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="list : ${myList}">
+        <td th:text="${list.name}">Lorem.</td>
+        <td th:text="${list.birthDate}">Inventore!</td>
+        <td th:text="${list.price}" class="italic" th:classappend="${list.price >= 5000} ? 'bold'">Iste.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
