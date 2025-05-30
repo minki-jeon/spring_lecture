@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- selection -->
+<ul th:object="${item}">
+  <li th:text="*{name}"></li>
+  <li th:text="*{birthDate}"></li>
+  <li th:text="*{price}"></li>
+</ul>
+<hr>
+<ul>
+  <li th:text="${item.name}"></li>
+  <li th:text="${item.birthDate}"></li>
+  <li th:text="${item.price}"></li>
+</ul>
+
+<hr>
+
+<div th:object="${person}">
+  <h3 th:text="*{number}"></h3>
+  <h4>company</h4>
+  <ul>
+    <li th:each="adr : *{address}" th:text="${adr}"></li>
+    <li th:each="cp : *{company}" th:text="${cp}"></li>
+  </ul>
+</div>
+</body>
+</html>
