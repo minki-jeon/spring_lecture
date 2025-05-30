@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="https://www.naver.com">링크1</a>
+<a href="https://localhost:8080/main8/sub2">링크2</a>
+
+<!-- 주소(href/src) 작성시 @{} 내에 작성할 것 (관리자도구 확인하면, context-path + sessionId 자동 포함되어 적용됨) -->
+<a href="/main8/sub2" th:href="'/main8/sub2'">링크3</a>
+<!-- <a href="/main8/sub2">링크3</a> -->
+<a href="/main8/sub2" th:href="@{/main8/sub2}">링크4</a>
+<!-- <a href="/main8/sub2;jsessionid=D0CEF514B92C4ACD43B1D3AD4772C800">링크4</a> -->
+<hr>
+<img src="../../static/images/bear.jpg" alt="" th:src="'/images/bear.jpg'">
+<img src="../../static/images/bear.jpg" alt="" th:src="@{/images/bear.jpg}">
+
+<hr>
+<!-- 링크주소에 쿼리스트링(request parameters) 붙이기 -->
+<a href="" th:href="'/main8/sub2?abc=def&qwe=xyz'">링크1</a>
+<a href="" th:href="@{/main8/sub2(abc='def', qwe='xyz')}">링크1</a>
+
+</body>
+</html>
