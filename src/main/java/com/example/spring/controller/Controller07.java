@@ -1,5 +1,6 @@
 package com.example.spring.controller;
 
+import com.example.spring.dto.MyBean053;
 import com.example.spring.dto.MyBean055;
 import com.example.spring.dto.MyBean057;
 import org.springframework.stereotype.Controller;
@@ -86,5 +87,24 @@ public class Controller07 {
 
 
         return "main7/sub8";
+    }
+
+    @RequestMapping("sub9")
+    public String sub9(Model model) {
+
+        model.addAttribute("name", "son");
+        model.addAttribute("married", false);
+        model.addAttribute("working", true);
+        model.addAttribute("age", 55);
+        model.addAttribute("city", null);
+
+        model.addAttribute("students",
+                List.of(new MyBean053(33.3, "trump",10, true),
+                        new MyBean053(44.4, "donald", 20, false),
+                        new MyBean053(55.5, "musk", 30, true),
+                        new MyBean053(66.6, "elvis",40, false),
+                        new MyBean053(77.7, "elon", 50, true)));
+
+        return "main7/sub9";
     }
 }
