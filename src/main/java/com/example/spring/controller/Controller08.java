@@ -42,13 +42,25 @@ public class Controller08 {
     public String sub3(Model model, HttpSession session) {
 
         return "main8/sub3";
-    }
 
+    }
     @RequestMapping("sub4")
     public String sub4(Model model, String animal) {
 
         model.addAttribute("animal", animal);
 
         return "main8/sub4";
+    }
+
+    @RequestMapping("sub5")
+    public String sub5(Model model, HttpSession session) {
+
+        return "main8/sub5";
+    }
+
+    @RequestMapping("sub6")
+    public String sub6(Model model, HttpSession session) {
+
+        return "main8/sub6";
     }
 }
