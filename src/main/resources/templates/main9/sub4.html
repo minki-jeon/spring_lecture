@@ -146,9 +146,80 @@
         <label for="input-text">이름</label>
         <input type="text" id="input-text" name="name" value="머스크">
     </div>
+</form>
+
+<hr>
+<form th:action="@{/main9/sub12}">
+    <div>
+<!--  3개의 country -->
+        <label for="radio-korea">한국</label>
+        <input type="radio" name="country" id="radio-korea" value="korea">
+        <label for="radko-us">미국</label>
+        <input type="radio" name="country" id="radko-us" value="us">
+        <label for="radio-jp">일본</label>
+        <input type="radio" name="country" id="radio-jp" value="japan">
+    </div>
+
+    <!--  radio button: 같은 name 중에 하나의 값만 선택 가능  -->
+    <label for="radio-mango"></label>
+    <input type="radio" name="fruit" id="radio-mango" value="mango">
+    <label for="radio-melon"></label>
+    <input type="radio" name="fruit" id="radio-melon" value="melon" checked>
+    <label for="radio-apple"></label>
+    <input type="radio" name="fruit" id="radio-apple" value="apple">
+
+    <input type="submit" value="전송">
+</form>
+
+<hr>
+<form action="">
+    <!--  readonly : 변경 불가  -->
+    <input type="text" name="name" value="홍길동" readonly>
+    <!--  placeholder: 입력할 값의 Hint  -->
+    <input type="text" name="address" placeholder="주소를 입력하세요.">
+    <!--  multiple : 여러개의 파일 지정  -->
+    <input type="file" name="f" id="" multiple>
+    <!-- required : 필수 입력-->
+    <input type="text" name="city" required>
+</form>
+
+<hr>
+<form th:action="@{/main9/sub13}">
+<!--  String city, Integer age, Double score, String[] fruits, Boolean accepted  -->
+    <div>
+        <label for="input1">도시: </label>
+        <input type="text" name="city" id="input1">
+    </div>
+    <div>
+        <label for="input2">나이: </label>
+        <input type="number" name="age" id="input2" min="0" max="100" step="1">
+    </div>
+    <div>
+        <label for="input3">점수: </label>
+        <input type="number" name="score" id="input3" min="0" max="10" step="0.1">
+    </div>
+    <div>
+        과일:
+        <label for="check-apple">사과</label>
+        <input type="checkbox" name="fruits" id="check-apple" value="apple">
+        <label for="check-mango">망고</label>
+        <input type="checkbox" name="fruits" id="check-mango" value="mango">
+        <label for="check-lemon">레몬</label>
+        <input type="checkbox" name="fruits" id="check-lemon" value="lemon">
+    </div>
+    <div>
+        <label for="radio1"> 체크동의: </label>
+        <input type="radio" name="accepted" id="radio1" value="true" >
+        <label for="radio2"> 체크동의: </label>
+        <input type="radio" name="accepted" id="radio2" value="false" checked>
+    </div>
+    <div>
+        <input type="submit" value="제출">
+    </div>
 
 
 </form>
+
 
 </body>
 </html>
