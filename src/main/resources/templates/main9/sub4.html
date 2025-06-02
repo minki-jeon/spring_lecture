@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3> /main9/sub4 </h3>
+<!-- Form : 사용자가 입력한 내용을 쿼리스트링에 붙여서 요청을 보냄 -->
+<!-- action 속성 : 쿼리스트링(Request Parameter)를 어디로 보낼지 결정-->
+<form th:action="@{/main9/sub5}">
+<!--    Form 요소(input, textarea, select,..) : request parameter를 완성하는 요소 -->
+<!--    input, type=text -->
+<!--    name 속성: request parameter의 이름 -->
+    <div>
+        <input type="text" name="keyword">
+    </div>
+    <div>
+        <input type="text" name="email">
+    </div>
+
+
+<!--    submit button : 클릭하면 Form 내의 요소들로 쿼리스트링 만들어서 action으로 요청 보냄 -->
+    <div>
+        <input type="submit" value="저장">
+    </div>
+</form>
+
+<hr>
+
+<!-- submit to /main9/sub6 -->
+<!-- address, age, city -->
+<form th:action="@{/main9/sub6}">
+    <div>
+        <input type="text" name="address">
+    </div>
+    <div>
+        <input type="text" name="age">
+    </div>
+    <div>
+        <input type="text" name="city">
+    </div>
+    <div>
+        <input type="submit" value="제출">
+    </div>
+</form>
+
+<hr>
+<form th:action="@{/main9/sub7}">
+<!--   input submit -->
+    <input type="submit">
+<!--   button submit -->
+    <button>저장</button>
+<!--   단순 버튼 -->
+    <input type="button" value="단순버튼1">
+    <button type="button">단순버튼2</button>
+</form>
+
+<hr>
+<form th:action="@{/main9/sub8}">
+<!--    value 속성 : 기본값 적용 -->
+    <input type="text" name="address" value="seoul">
+    <input type="text" name="name" value="홍길동">
+    <input type="text" name="age" value="1">
+
+    <button>저장</button>
+</form>
+
+<hr>
+<form th:action="@{/main9/sub9}">
+    <div>
+<!--    text field    -->
+        <input type="text" name="name">
+    </div>
+    <div>
+<!--    number field    -->
+        <input type="number" min="0" max="10" step="0.1" name="score">
+    </div>
+    <div>
+<!--    password field    -->
+        <input type="password" name="pw">
+    </div>
+    <div>
+<!--    날짜    -->
+        <input type="date" name="birth">
+    </div>
+    <div>
+<!--    날짜+시간    -->
+        <input type="datetime-local" name="start">
+    </div>
+    <div>
+<!--    email    -->
+        <input type="email" name="mail">
+    </div>
+    <div>
+<!--    file    -->
+        <input type="file" name="f">
+    </div>
+    <div>
+<!--    숨겨진 input 요소 : 사용자로부터 보이지않게 값을 전달할 때 사용   -->
+        <input type="hidden" name="h" value="숨겨진값">
+    </div>
+
+    <div>
+<!--    submit 버튼    -->
+        <input type="submit">
+    </div>
+</form>
+
+<hr>
+<form th:action="@{/main9/sub10}">
+<!--  checkbox  -->
+    <div>
+        <input type="checkbox" name="accept" value="true" checked>
+    </div>
+    <div>
+        <input type="checkbox" name="greeting" value="hello">
+    </div>
+    <div>
+<!-- input:c*5 -->
+        <input type="checkbox" name="hobby" id="" value="baseball"> 야구
+        <input type="checkbox" name="hobby" id="" value="basketball"> 농구
+        <input type="checkbox" name="hobby" id="" value="football"> 축구
+        <input type="checkbox" name="hobby" id="" value="rugby"> 럭비
+        <input type="checkbox" name="hobby" id="" value="cook"> 요리
+    </div>
+
+    <div>
+        <input type="submit" value="전송">
+    </div>
+</form>
+
+<form th:action="@{/main9/sub11}">
+<!--  label: 특정 input에 붙인(bind) 텍스트  -->
+    <label for="input-mango">망고</label>
+    <input type="checkbox" name="fruit" id="input-mango" value="mango">
+    <label for="input-melon">멜론</label>
+    <input type="checkbox" name="fruit" id="input-melon" value="melon">
+    <label for="input-apple">사과</label>
+    <input type="checkbox" name="fruit" id="input-apple" value="apple">
+    <label>
+        바나나
+        <input type="checkbox" name="fruit" value="banana">
+    </label>
+    <div>
+        <label for="input-text">이름</label>
+        <input type="text" id="input-text" name="name" value="머스크">
+    </div>
+
+
+</form>
+
+</body>
+</html>
