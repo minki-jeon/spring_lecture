@@ -3,6 +3,7 @@ package com.example.spring.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -72,6 +73,7 @@ public class Controller12 {
 
         return "redirect:/main12/sub7";
     }
+
     @GetMapping("sub7")
     public String sub7(Model model) {
         return "/main12/sub7";
@@ -90,8 +92,60 @@ public class Controller12 {
 
         return "redirect:/main12/sub9";
     }
+
     @GetMapping("sub9")
     public String sub9(Model model) {
         return "/main12/sub9";
     }
+
+    /*
+         2025-06-04 (수) 오전 10:15
+         main
+     */
+    @GetMapping("sub10")
+    public String sub10(Model model) {
+        return "/main12/sub10";
+    }
+
+    /*
+         2025-06-04 (수) 오전 10:16
+         login page
+     */
+    @GetMapping("sub11")
+    public String sub11(Model model) {
+        return "/main12/sub11";
+    }
+
+    /*
+         2025-06-04 (수) 오전 10:20
+         login process
+     */
+    @PostMapping("sub11")
+    public String sub11Process(String id, RedirectAttributes rttr) {
+        System.out.println(id + " 로그인 처리");
+
+        rttr.addFlashAttribute("message", id +" 님이 로그인 되었습니다.");
+
+        return "redirect:/main12/sub10";
+    }
+
+    /*
+         2025-06-04 (수) 오전 10:30
+     */
+    @GetMapping("sub12")
+    public String sub12(Model model) {
+        // main
+        return "/main12/sub12";
+    }
+    @GetMapping("sub13")
+    public String sub13(Model model) {
+        return "/main12/sub13";
+    }
+    @PostMapping("sub13")
+    public String sub13Process(String id, String pw, RedirectAttributes rttr) {
+        System.out.println(id + " 로그인 처리 (pw : " + pw + ")");
+        rttr.addFlashAttribute("message", id +" 님이 로그인 하였습니다.");
+        return "redirect:/main12/sub12";
+    }
+
 }

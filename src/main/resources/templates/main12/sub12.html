@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:if="${message == null}">
+    <a th:href="@{/main12/sub13}">Login</a>
+</p>
+<!--  로그인 시 출력   -->
+<div th:if="${message != null}">
+    <span th:text="${message}"></span>
+</div>
+
+<h3> main Page </h3>
+
+</body>
+</html>
