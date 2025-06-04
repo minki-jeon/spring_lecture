@@ -46,3 +46,10 @@ SELECT * FROM Shippers;
 # FROM : 테이블 지정
 # WHERE : 행을 선택(Filter)
 
+SELECT *
+FROM Shippers;
+SELECT *
+FROM Customers;
+SELECT *
+FROM Employees;
+
