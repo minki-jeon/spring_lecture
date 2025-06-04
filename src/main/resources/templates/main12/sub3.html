@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- 2025-06-04 (수) 오전 9:23  -->
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    email :
+    <span th:text="${email}"></span>
+</p>
+<p>
+    country :
+    <span th:text="${country}"></span>
+</p>
+<p>
+<!--
+    RedirectAttributes .addFlashAttribute("city", "seoul")
+    /main12/sub2 페이지에서 redirect되었을 때만 값이 출력. (sub3에서 새로고침하면 출력되지 않음)
+-->
+    city :
+    <span th:text="${city}"></span>
+</p>
+</body>
+</html>

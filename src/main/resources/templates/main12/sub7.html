@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- 2025-06-04 (수) 오전 9:48 -->
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3> /main/sub7 </h3>
+<p>
+<!--  RedirectAttributes.addFlashAttribute("nickName", "trump")  -->
+    nickName :
+    <span th:text="${nickName}"></span>
+</p>
+<p>
+<!--  RedirectAttributes.addAttribute("address", "jeju")  -->
+    address :
+    <span th:text="${param.address}"></span>
+</p>
+</body>
+</html>
