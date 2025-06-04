@@ -5,9 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-<div>
+<div style="display: flex; justify-content: space-around">
     navbar
-    <a th:href="@{/main12/sub11}">로그인</a>
+    <div th:if="${session.userId == null}">
+        <a th:href="@{/main12/sub11}">로그인</a>
+    </div>
+    <div th:unless="${session.userId == null}">
+        <a th:href="@{/main12/sub11/logout}">로그아웃</a>
+    </div>
+    <div th:unless="${session.userId == null}">
+        <div>
+            <span th:text="${session.userId}"></span>
+             님
+        </div>
+    </div>
 </div>
 
 <div th:if="${message != null}">

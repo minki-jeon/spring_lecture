@@ -1,5 +1,6 @@
 package com.example.spring.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -120,12 +121,27 @@ public class Controller12 {
          2025-06-04 (수) 오전 10:20
          login process
      */
+    /*
+         2025-06-04 (수) 오전 10:41
+         session 추가
+     */
     @PostMapping("sub11")
-    public String sub11Process(String id, RedirectAttributes rttr) {
+    public String sub11Process(String id, RedirectAttributes rttr, HttpSession session) {
         System.out.println(id + " 로그인 처리");
 
+        session.setAttribute("userId", id);
         rttr.addFlashAttribute("message", id +" 님이 로그인 되었습니다.");
 
+        return "redirect:/main12/sub10";
+    }
+    @RequestMapping("sub11/logout")
+    public String sub11Logout(HttpSession session, RedirectAttributes rttr) {
+        // 특정 세션만 지우기
+//        session.removeAttribute("userId");
+        // session 객체 지우기
+        session.invalidate();
+
+        rttr.addFlashAttribute("message", "로그아웃 되었습니다.");
         return "redirect:/main12/sub10";
     }
 
@@ -141,10 +157,22 @@ public class Controller12 {
     public String sub13(Model model) {
         return "/main12/sub13";
     }
+    /*
+         2025-06-04 (수) 오전 10:51
+         logout 추가
+     */
     @PostMapping("sub13")
-    public String sub13Process(String id, String pw, RedirectAttributes rttr) {
+    public String sub13Process(String id, String pw, RedirectAttributes rttr, HttpSession session) {
         System.out.println(id + " 로그인 처리 (pw : " + pw + ")");
         rttr.addFlashAttribute("message", id +" 님이 로그인 하였습니다.");
+        session.setAttribute("userId", id);
+        return "redirect:/main12/sub12";
+    }
+    @RequestMapping("sub13/logout")
+    public String sub13Logout(HttpSession session, RedirectAttributes rttr) {
+//        session.removeAttribute("userId");
+        session.invalidate();
+        rttr.addFlashAttribute("message", "로그아웃 되었습니다.");
         return "redirect:/main12/sub12";
     }
 

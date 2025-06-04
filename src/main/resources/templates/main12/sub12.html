@@ -5,12 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-<p th:if="${message == null}">
+<p th:if="${session.userId == null}">
     <a th:href="@{/main12/sub13}">Login</a>
 </p>
 <!--  로그인 시 출력   -->
-<div th:if="${message != null}">
-    <span th:text="${message}"></span>
+<div th:if="${session.userId != null}">
+    <a th:href="@{/main12/sub13/logout}">Logout</a>
+    <div>
+        <span th:text="${session.userId}"></span> 님
+        <a href="">Profile</a>
+    </div>
+
+    <div>
+        <span th:text="${message}"></span>
+    </div>
 </div>
 
 <h3> main Page </h3>
