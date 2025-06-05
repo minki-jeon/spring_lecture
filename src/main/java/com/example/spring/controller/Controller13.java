@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -420,6 +421,132 @@ public class Controller13 {
         }
         model.addAttribute("productList", list);
         return "main13/sub13";
+    }
+
+    @GetMapping("sub14")
+    public String sub14(Model model) throws Exception {
+        // ? : 변경 가능한 부분
+        String sql = """
+                SELECT * FROM Products
+                WHERE Price < ?
+                """;
+
+        // 연결
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        // 실행 준비
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        // PreparedStatement.execute....() : 쿼리 실행
+        // PreparedStatement.set....(index, value) : 쿼리 내의 ? 채우는 메소드
+        statement.setDouble(1, 20.00);
+
+        // 실행
+        ResultSet resultSet = statement.executeQuery();
+
+        var list = new ArrayList<ProductsDTO>();
+        while (resultSet.next()) {
+            int productId = resultSet.getInt("ProductID");
+            String productName = resultSet.getString("ProductName");
+            int supplierID = resultSet.getInt("SupplierID");
+            int categoryID = resultSet.getInt("CategoryID");
+            String unit = resultSet.getString("Unit");
+            double price = resultSet.getDouble("Price");
+
+            ProductsDTO dto = new ProductsDTO();
+            dto.setId(productId);
+            dto.setName(productName);
+            dto.setSupplier(supplierID);
+            dto.setCategory(categoryID);
+            dto.setUnit(unit);
+            dto.setPrice(price);
+            list.add(dto);
+        }
+        model.addAttribute("productList", list);
+        return "main13/sub13";
+    }
+
+//    /main13/sub15?price=30.00
+    @GetMapping("sub15")
+    public String sub15(Model model, @RequestParam(defaultValue = "100.00") Double price) throws Exception {
+        // ? : 변경 가능한 부분
+        String sql = """
+                SELECT * FROM Products
+                WHERE Price < ?
+                """;
+
+        // 연결
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        // 실행 준비
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        // PreparedStatement.execute....() : 쿼리 실행
+        // PreparedStatement.set....(index, value) : 쿼리 내의 ? 채우는 메소드
+        statement.setDouble(1, price);
+
+        // 실행
+        ResultSet resultSet = statement.executeQuery();
+
+        var list = new ArrayList<ProductsDTO>();
+        while (resultSet.next()) {
+            int productId = resultSet.getInt("ProductID");
+            String productName = resultSet.getString("ProductName");
+            int supplierID = resultSet.getInt("SupplierID");
+            int categoryID = resultSet.getInt("CategoryID");
+            String unit = resultSet.getString("Unit");
+
+            ProductsDTO dto = new ProductsDTO();
+            dto.setId(productId);
+            dto.setName(productName);
+            dto.setSupplier(supplierID);
+            dto.setCategory(categoryID);
+            dto.setUnit(unit);
+            dto.setPrice(resultSet.getDouble("Price"));
+            list.add(dto);
+        }
+        model.addAttribute("productList", list);
+        return "main13/sub15";
+    }
+
+    @GetMapping("sub16")
+    public String sub16(Model model, @RequestParam(defaultValue = "1") int category) throws Exception {
+        String sql = """
+                SELECT * 
+                FROM Products 
+                WHERE CategoryID = ?
+                """;
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, category);
+        ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<ProductsDTO>();
+        while (resultSet.next()) {
+            int productId = resultSet.getInt("ProductID");
+            String productName = resultSet.getString("ProductName");
+            int supplierID = resultSet.getInt("SupplierID");
+            int categoryID = resultSet.getInt("CategoryID");
+            String unit = resultSet.getString("Unit");
+            double price = resultSet.getDouble("Price");
+
+            ProductsDTO dto = new ProductsDTO();
+            dto.setId(productId);
+            dto.setName(productName);
+            dto.setSupplier(supplierID);
+            dto.setCategory(categoryID);
+            dto.setUnit(unit);
+            dto.setPrice(price);
+            list.add(dto);
+        }
+        model.addAttribute("productList", list);
+        return "main13/sub16";
     }
 
 }
