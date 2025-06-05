@@ -144,4 +144,82 @@ public class Controller13 {
         return "main13/sub3";
     }
 
+    @GetMapping("sub5")
+    public String sub5(Model model) throws Exception {
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        String sql = """
+                SELECT CategoryName
+                FROM Categories
+                """;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<String>();
+        while (resultSet.next()) {
+            String name = resultSet.getString("CategoryName");
+            list.add(name);
+        }
+        model.addAttribute("nameList", list);
+
+        return "main13/sub5";
+    }
+
+    @GetMapping("sub6")
+    public String sub6(Model model) throws Exception {
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        String sql = """
+                SELECT Price
+                FROM Products
+                ORDER BY Price
+                """;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        /*
+        var list = new ArrayList<String>();
+        while (resultSet.next()) {
+            String price = resultSet.getString("Price");
+            list.add(price);
+        }
+         */
+        // 모든 데이터는 String 타입으로 반환될 수 있지만,
+        // 특별한 이유가 없다면 type에 맞는 get...() 메소드 사용할 것
+        var list = new ArrayList<Double>();
+        while (resultSet.next()) {
+            double price = resultSet.getDouble("Price");
+            list.add(price);
+        }
+
+        model.addAttribute("priceList", list);
+
+        return "main13/sub6";
+    }
+
+    @GetMapping("sub7")
+    public String sub7(Model model) throws Exception {
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        String sql = """
+                SELECT Quantity
+                FROM OrderDetails
+                ORDER BY Quantity DESC
+                LIMIT 5
+                """;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<Integer>();
+        while (resultSet.next()) {
+            int quantity = resultSet.getInt("Quantity");
+            list.add(quantity);
+        }
+        model.addAttribute("quantityList", list);
+        return "main13/sub7";
+    }
 }
