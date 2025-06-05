@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, tr, td, th {
+            border-collapse: collapse;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+
+<h3>고객 목록</h3>
+<hr>
+<form th:action="@{/main13/sub20}">
+    <label>
+        국가
+        <select name="country">
+            <option th:each="country : ${countryList}"
+                    th:value="${country}"
+                    th:text="${country}"
+                    th:selected="${(param.country != null) && (param.country[0] == country)}"></option>
+        </select>
+    </label>
+    <button>조회</button>
+</form>
+<hr>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>CONTACT</th>
+        <th>ADDRESS</th>
+        <th>CITY</th>
+        <th>POST</th>
+        <th>COUNTRY</th>
+        <th>PHONE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="supplier : ${supplierList}">
+        <td th:text="${supplier.id}"></td>
+        <td th:text="${supplier.name}"></td>
+        <td th:text="${supplier.contactName}"></td>
+        <td th:text="${supplier.address}"></td>
+        <td th:text="${supplier.city}"></td>
+        <td th:text="${supplier.postalCode}"></td>
+        <td th:text="${supplier.country}"></td>
+        <td th:text="${supplier.phone}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

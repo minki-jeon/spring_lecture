@@ -2,6 +2,7 @@ package com.example.spring.controller;
 
 import com.example.spring.dto.CustomerDto;
 import com.example.spring.dto.ProductsDTO;
+import com.example.spring.dto.SuppliersDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -468,7 +469,7 @@ public class Controller13 {
         return "main13/sub13";
     }
 
-//    /main13/sub15?price=30.00
+    //    /main13/sub15?price=30.00
     @GetMapping("sub15")
     public String sub15(Model model, @RequestParam(defaultValue = "100.00") Double price) throws Exception {
         // ? : 변경 가능한 부분
@@ -547,6 +548,173 @@ public class Controller13 {
         }
         model.addAttribute("productList", list);
         return "main13/sub16";
+    }
+
+    @GetMapping("sub17")
+    public String sub17(
+            @RequestParam(defaultValue = "10.00")
+            Double price,
+            @RequestParam(defaultValue = "1")
+            Integer category,
+            Model model) throws Exception {
+        String sql = """
+                SELECT * FROM Products
+                WHERE Price < ?
+                  AND CategoryID = ? 
+                """;
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setDouble(1, price);
+        statement.setInt(2, category);
+        ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<ProductsDTO>();
+        while (resultSet.next()) {
+            ProductsDTO dto = new ProductsDTO();
+            int productId = resultSet.getInt("ProductID");
+            String productName = resultSet.getString("ProductName");
+            int supplierID = resultSet.getInt("SupplierID");
+            int categoryID = resultSet.getInt("CategoryID");
+            String unit = resultSet.getString("Unit");
+
+            dto.setId(productId);
+            dto.setName(productName);
+            dto.setSupplier(supplierID);
+            dto.setCategory(categoryID);
+            dto.setUnit(unit);
+            dto.setPrice(resultSet.getDouble("Price"));
+            list.add(dto);
+
+        }
+        model.addAttribute("productList", list);
+        return "main13/sub17";
+    }
+
+    @GetMapping("sub18")
+    public String sub18(Model model,
+                        @RequestParam(defaultValue = "0") Double minPrice,
+                        @RequestParam(defaultValue = "20.00") Double maxPrice) throws Exception {
+        String sql = """
+                SELECT * FROM Products
+                WHERE Price BETWEEN ? AND ? 
+                ORDER BY Price
+                """;
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setDouble(1, minPrice);
+        statement.setDouble(2, maxPrice);
+        ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<ProductsDTO>();
+        while (resultSet.next()) {
+            ProductsDTO dto = new ProductsDTO();
+            dto.setId(resultSet.getInt("ProductID"));
+            dto.setName(resultSet.getString("ProductName"));
+            dto.setSupplier(resultSet.getInt("SupplierID"));
+            dto.setCategory(resultSet.getInt("CategoryID"));
+            dto.setUnit(resultSet.getString("Unit"));
+            dto.setPrice(resultSet.getDouble("Price"));
+            list.add(dto);
+        }
+        model.addAttribute("productList", list);
+        return "main13/sub18";
+    }
+
+    @GetMapping("sub19")
+    public String sub19(Model model, String country) throws Exception {
+        String countrySql = """
+                SELECT DISTINCT Country
+                FROM Customers
+                ORDER BY Country
+                """;
+
+        String sql = """
+                SELECT * 
+                FROM Customers
+                WHERE Country = ?
+                ORDER BY City
+                """;
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        // 국가 조회
+        PreparedStatement statement1 = connection.prepareStatement(countrySql);
+        ResultSet resultSet1 = statement1.executeQuery();
+        var list1 = new ArrayList<String>();
+        while (resultSet1.next()) {
+            list1.add(resultSet1.getString("Country"));
+        }
+        model.addAttribute("countryList", list1);
+
+        // 고객 조회
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, country);
+        ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<CustomerDto>();
+        while (resultSet.next()) {
+            CustomerDto dto = new CustomerDto();
+            dto.setId(resultSet.getInt("CustomerID"));
+            dto.setName(resultSet.getString("CustomerName"));
+            dto.setCity(resultSet.getString("City"));
+            dto.setCountry(resultSet.getString("Country"));
+            dto.setContactName(resultSet.getString("ContactName"));
+            dto.setPostalCode(resultSet.getString("PostalCode"));
+            dto.setAddress(resultSet.getString("Address"));
+            list.add(dto);
+        }
+        model.addAttribute("customerList", list);
+        return "main13/sub19";
+    }
+
+    @GetMapping("sub20")
+    public String sub20(Model model, String country) throws Exception {
+        String countrySql = """
+                SELECT DISTINCT Country
+                FROM Customers
+                ORDER BY Country
+                """;
+
+        String sql = """
+                SELECT * FROM Suppliers
+                WHERE Country = ?
+                """;
+
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement1 = connection.prepareStatement(countrySql);
+        ResultSet resultSet1 = statement1.executeQuery();
+        var list1 = new ArrayList<String>();
+        while (resultSet1.next()) {
+            list1.add(resultSet1.getString("Country"));
+        }
+        model.addAttribute("countryList", list1);
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, country);
+        ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<SuppliersDTO>();
+        while (resultSet.next()) {
+            SuppliersDTO dto = new SuppliersDTO();
+            dto.setId(resultSet.getInt("SupplierID"));
+            dto.setName(resultSet.getString("SupplierName"));
+            dto.setContactName(resultSet.getString("ContactName"));
+            dto.setAddress(resultSet.getString("Address"));
+            dto.setCity(resultSet.getString("City"));
+            dto.setPostalCode(resultSet.getString("PostalCode"));
+            dto.setCountry(resultSet.getString("Country"));
+            dto.setPhone(resultSet.getString("Phone"));
+            list.add(dto);
+        }
+        model.addAttribute("supplierList", list);
+
+        return "main13/sub20";
     }
 
 }
