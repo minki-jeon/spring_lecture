@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("main13")
@@ -221,5 +223,58 @@ public class Controller13 {
         }
         model.addAttribute("quantityList", list);
         return "main13/sub7";
+    }
+
+    @GetMapping("sub8")
+    public String sub8(Model model) throws Exception {
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        String sql = """
+                SELECT LastName, FirstName
+                FROM Employees
+                """;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<Map<String, String>>();
+        while (resultSet.next()) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("lastName", resultSet.getString("LastName"));
+            map.put("firstName", resultSet.getString("FirstName"));
+
+            list.add(map);
+        }
+
+        model.addAttribute("nameList", list);
+
+        return "main13/sub8";
+    }
+
+    @GetMapping("sub9")
+    public String sub9(Model model) throws Exception {
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        String sql = """
+                SELECT CustomerName, City, Country
+                FROM Customers
+                WHERE Country = 'USA' OR Country = 'UK'
+                """;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<Map<String, String>>();
+        while (resultSet.next()) {
+            Map<String, String> map = new HashMap<>();
+            map.put("customerName", resultSet.getString("CustomerName"));
+            map.put("country", resultSet.getString("Country"));
+            map.put("city", resultSet.getString("City"));
+
+            list.add(map);
+        }
+        model.addAttribute("customerList", list);
+        return "main13/sub9";
     }
 }
