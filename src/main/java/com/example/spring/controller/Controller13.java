@@ -1,6 +1,7 @@
 package com.example.spring.controller;
 
 import com.example.spring.dto.CustomerDto;
+import com.example.spring.dto.ProductsDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -385,6 +386,40 @@ public class Controller13 {
         }
         model.addAttribute("customerList", list);
         return "main13/sub12";
+    }
+
+    @GetMapping("sub13")
+    public String sub13(Model model) throws Exception {
+        String sql = """
+                SELECT * FROM Products
+                """;
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        var list = new ArrayList<ProductsDTO>();
+        while (resultSet.next()) {
+            int productId = resultSet.getInt("ProductID");
+            String productName = resultSet.getString("ProductName");
+            int supplierID = resultSet.getInt("SupplierID");
+            int categoryID = resultSet.getInt("CategoryID");
+            String unit = resultSet.getString("Unit");
+            double price = resultSet.getDouble("Price");
+
+            ProductsDTO dto = new ProductsDTO();
+            dto.setId(productId);
+            dto.setName(productName);
+            dto.setSupplier(supplierID);
+            dto.setCategory(categoryID);
+            dto.setUnit(unit);
+            dto.setPrice(price);
+            list.add(dto);
+        }
+        model.addAttribute("productList", list);
+        return "main13/sub13";
     }
 
 }
