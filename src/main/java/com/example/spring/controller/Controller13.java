@@ -1,5 +1,6 @@
 package com.example.spring.controller;
 
+import com.example.spring.dto.CustomerDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -277,4 +278,113 @@ public class Controller13 {
         model.addAttribute("customerList", list);
         return "main13/sub9";
     }
+
+    @GetMapping("sub10")
+    public String sub10(Model model) throws Exception {
+        String sql = """
+                SELECT * FROM Products""";
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        var list = new ArrayList<Map<String, Object>>();
+        while (resultSet.next()) {
+            int productId = resultSet.getInt("ProductID");
+            String productName = resultSet.getString("ProductName");
+            int supplierID = resultSet.getInt("SupplierID");
+            int categoryID = resultSet.getInt("CategoryID");
+            String unit = resultSet.getString("Unit");
+            double price = resultSet.getDouble("Price");
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("productId", productId);
+            map.put("productName", productName);
+            map.put("supplierID", supplierID);
+            map.put("categoryID", categoryID);
+            map.put("unit", unit);
+            map.put("price", price);
+            list.add(map);
+
+        }
+        model.addAttribute("productList", list);
+        return "main13/sub10";
+    }
+
+    @GetMapping("sub11")
+    public String sub11(Model model) throws Exception {
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        String sql = """
+                SELECT * FROM Customers
+                """;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        var list = new ArrayList<Map<String, Object>>();
+        while (resultSet.next()) {
+            int customerId = resultSet.getInt("CustomerID");
+            String customerName = resultSet.getString("CustomerName");
+            String contactName = resultSet.getString("ContactName");
+            String address = resultSet.getString("Address");
+            String city = resultSet.getString("City");
+            String postalCode = resultSet.getString("PostalCode");
+            String country = resultSet.getString("Country");
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("customerId", customerId);
+            map.put("customerName", customerName);
+            map.put("contactName", contactName);
+            map.put("address", address);
+            map.put("city", city);
+            map.put("postalCode", postalCode);
+            map.put("country", country);
+            list.add(map);
+        }
+
+        model.addAttribute("customerList", list);
+        return "main13/sub11";
+    }
+
+    @GetMapping("sub12")
+    public String sub12(Model model) throws Exception {
+        String sql = """
+                SELECT * FROM Customers
+                """;
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        var list = new ArrayList<CustomerDto>();
+
+        while (resultSet.next()) {
+            int customerId = resultSet.getInt("CustomerID");
+            String customerName = resultSet.getString("CustomerName");
+            String contactName = resultSet.getString("ContactName");
+            String address = resultSet.getString("Address");
+            String city = resultSet.getString("City");
+            String postalCode = resultSet.getString("PostalCode");
+            String country = resultSet.getString("Country");
+
+            CustomerDto dto = new CustomerDto();
+            dto.setId(customerId);
+            dto.setName(customerName);
+            dto.setContactName(contactName);
+            dto.setAddress(address);
+            dto.setCity(city);
+            dto.setPostalCode(postalCode);
+            dto.setCountry(country);
+            list.add(dto);
+        }
+        model.addAttribute("customerList", list);
+        return "main13/sub12";
+    }
+
 }
