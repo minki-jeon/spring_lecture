@@ -6,7 +6,7 @@
     <style>
         table, tr, td, th {
             border-collapse: collapse;
-            border: 1px solid blue;
+            border: 1px solid #ccc;
         }
     </style>
 </head>
@@ -27,7 +27,8 @@
     <button>조회</button>
 </form>
 <hr>
-<table>
+<p th:if="${supplierList == null || supplierList.isEmpty()}">조회된 결과가 없습니다.</p>
+<table th:if="${supplierList.size() > 0}">
     <thead>
     <tr>
         <th>ID</th>
