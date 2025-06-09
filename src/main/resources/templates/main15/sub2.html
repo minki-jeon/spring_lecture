@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, th, tr, td {
+            border-collapse: collapse;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+<h3>페이지별 공급자 조회</h3>
+<hr>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Contact</th>
+        <th>Addr</th>
+        <th>City</th>
+        <th>Postal</th>
+        <th>Country</th>
+        <th>phone</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sup : ${supplierList}">
+        <td th:text="${sup.id}"></td>
+        <td th:text="${sup.name}"></td>
+        <td th:text="${sup.contactName}"></td>
+        <td th:text="${sup.address}"></td>
+        <td th:text="${sup.city}"></td>
+        <td th:text="${sup.postalCode}"></td>
+        <td th:text="${sup.country}"></td>
+        <td th:text="${sup.phone}"></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <span th:each="num : ${#numbers.sequence(1, lastPage)}">
+        <a th:href="@{/main15/sub2(page=${num})}"
+           th:text="${num}"></a>
+        |
+    </span>
+</div>
+
+</body>
+</html>
