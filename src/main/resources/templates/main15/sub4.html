@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, th, tr, td {
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<h3>상품명 조회 (w/ page)</h3>
+<hr>
+<form th:action="@{/main15/sub4}">
+    <label>
+        상품명
+        <input type="text" name="keyword" th:value="${param.keyword ?: ''}">
+    </label>
+    <button>검색</button>
+</form>
+<hr>
+<table th:if="${productList.size > 0}">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Supplier</th>
+        <th>Category</th>
+        <th>Unit</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${productList}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.supplier}"></td>
+        <td th:text="${product.category}"></td>
+        <td th:text="${product.unit}"></td>
+        <td th:text="${product.price}"></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <span th:each="num : ${#numbers.sequence(1, lastPage)}">
+        <a th:if="${param.keyword == null}" th:href="@{/main15/sub4(page=${num})}"
+           th:text="${num}"></a>
+        <a th:if="${param.keyword != null}" th:href="@{/main15/sub4(page=${num}, keyword=${param.keyword})}"
+           th:text="${num}"></a>
+        |
+    </span>
+</div>
+
+</body>
+</html>

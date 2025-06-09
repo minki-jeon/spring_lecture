@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, th, tr, td {
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<h3>고객 이름 조회 (w/ page)</h3>
+<hr>
+<form th:action="@{/main15/sub3}">
+    <label>
+        이름
+        <input type="text" name="keyword" th:value="${param.keyword ?: ''}">
+    </label>
+    <button>검색</button>
+</form>
+<hr>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Contact</th>
+        <th>Addr</th>
+        <th>City</th>
+        <th>Postal</th>
+        <th>Country</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cust : ${customerList}">
+        <td th:text="${cust.id}"></td>
+        <td th:text="${cust.name}"></td>
+        <td th:text="${cust.contactName}"></td>
+        <td th:text="${cust.address}"></td>
+        <td th:text="${cust.city}"></td>
+        <td th:text="${cust.postalCode}"></td>
+        <td th:text="${cust.country}"></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <span th:each="num : ${#numbers.sequence(1, lastPage)}">
+        <a th:if="${param.keyword == null}" th:href="@{/main15/sub3(page=${num})}"
+           th:text="${num}"></a>
+        <a th:if="${param.keyword != null}" th:href="@{/main15/sub3(page=${num}, keyword=${param.keyword})}"
+           th:text="${num}"></a>
+        |
+    </span>
+</div>
+
+</body>
+</html>

@@ -1,9 +1,11 @@
 package com.example.spring.controller;
 
 import com.example.spring.dto.CustomerDto;
+import com.example.spring.dto.ProductsDTO;
 import com.example.spring.dto.SuppliersDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,9 +30,9 @@ public class Controller15 {
                 """;
         // 총 고객수
         String countSql = """
-                        SELECT COUNT(*) count
-                        FROM Customers
-                        """;
+                SELECT COUNT(*) count
+                FROM Customers
+                """;
         String url = "jdbc:mysql://localhost:3306/w3schools";
         String username = "root";
         String password = "1234";
@@ -116,4 +118,117 @@ public class Controller15 {
         return "main15/sub2";
     }
 
+    // paging + 검색
+    @GetMapping("sub3")
+    public String sub3(@RequestParam(defaultValue = "1") Integer page,
+                       @RequestParam(defaultValue = "") String keyword,
+                       Model model) throws Exception {
+
+        String countSql = """
+                SELECT COUNT(*) count
+                FROM Customers
+                WHERE CustomerName LIKE ?
+                OR ContactName LIKE ?
+                """;
+        String sql = """
+                SELECT *
+                FROM Customers
+                WHERE CustomerName LIKE ?
+                OR ContactName LIKE ?
+                ORDER BY CustomerID
+                LIMIT ?, ?
+                """;
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement countStmt = connection.prepareStatement(countSql);
+        countStmt.setString(1, "%" + keyword + "%");
+        countStmt.setString(2, "%" + keyword + "%");
+        PreparedStatement selectStmt = connection.prepareStatement(sql);
+        selectStmt.setString(1, "%" + keyword + "%");
+        selectStmt.setString(2, "%" + keyword + "%");
+
+        Integer offset = (page - 1) * 5;
+        selectStmt.setInt(3, offset);
+        selectStmt.setInt(4, 5);
+
+        ResultSet rs1 = countStmt.executeQuery();
+        rs1.next();
+        int count = rs1.getInt("count");
+        int lastPage = (count - 1) / 5 + 1;
+        model.addAttribute("lastPage", lastPage);
+
+        ResultSet rs2 = selectStmt.executeQuery();
+        List<CustomerDto> list = new ArrayList<>();
+        while (rs2.next()) {
+            CustomerDto customerDto = new CustomerDto();
+            customerDto.setId(rs2.getInt("customerId"));
+            customerDto.setName(rs2.getString("customerName"));
+            customerDto.setContactName(rs2.getString("contactName"));
+            customerDto.setAddress(rs2.getString("address"));
+            customerDto.setCity(rs2.getString("city"));
+            customerDto.setPostalCode(rs2.getString("postalCode"));
+            customerDto.setCountry(rs2.getString("country"));
+            list.add(customerDto);
+        }
+        model.addAttribute("customerList", list);
+
+        return "main15/sub3";
+    }
+
+    @GetMapping("sub4")
+    public String sub4(@RequestParam(defaultValue = "1") Integer page,
+                       @RequestParam(defaultValue = "") String keyword,
+                       Model model) throws Exception {
+
+        String countSql = """
+                SELECT COUNT(*) count
+                FROM Products
+                WHERE ProductName LIKE ?
+                """;
+        String sql = """
+                SELECT *
+                FROM Products
+                WHERE ProductName LIKE ?
+                ORDER BY ProductID
+                LIMIT ?, ?
+                """;
+
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        PreparedStatement countStmt = connection.prepareStatement(countSql);
+        countStmt.setString(1, "%" + keyword + "%");
+
+        PreparedStatement selectStmt = connection.prepareStatement(sql);
+        selectStmt.setString(1, "%" + keyword + "%");
+        Integer offset = (page - 1) * 5;
+        selectStmt.setInt(2, offset);
+        selectStmt.setInt(3, 5);
+
+        ResultSet rs1 = countStmt.executeQuery();
+        rs1.next();
+        int count = rs1.getInt("count");
+        int lastPage = (count - 1) / 5 + 1;
+        model.addAttribute("lastPage", lastPage);
+
+        ResultSet rs2 = selectStmt.executeQuery();
+        List<ProductsDTO> list = new ArrayList<>();
+        while (rs2.next()) {
+            ProductsDTO productsDTO = new ProductsDTO();
+            productsDTO.setId(rs2.getInt("productId"));
+            productsDTO.setName(rs2.getString("productName"));
+            productsDTO.setSupplier(rs2.getInt("supplierId"));
+            productsDTO.setCategory(rs2.getInt("categoryId"));
+            productsDTO.setUnit(rs2.getString("unit"));
+            productsDTO.setPrice(rs2.getDouble("price"));
+            list.add(productsDTO);
+        }
+        model.addAttribute("productList", list);
+
+        return "main15/sub4";
+    }
 }
