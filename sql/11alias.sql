@@ -33,3 +33,21 @@ FROM Products AS p,
 SELECT p.ProductName, c.CategoryName
 FROM Products p,
      Categories c;
+
+
+#############################
+# 페이징연습용 쿼리
+#############################
+# 대량의 고객 정보 입력
+INSERT INTO Customers
+(customername, contactname, address, city, postalcode, country)
+SELECT CustomerName, ContactName, Address, City, PostalCode, Country
+FROM Customers;
+SELECT COUNT(*) FROM Customers;
+# 대량의 상품 정보 입력
+INSERT INTO Products
+(PRODUCTNAME, SUPPLIERID, CATEGORYID, UNIT, PRICE)
+SELECT  PRODUCTNAME, SUPPLIERID, CATEGORYID, UNIT, PRICE
+FROM Products;
+SELECT COUNT(*) FROM Products;
+
