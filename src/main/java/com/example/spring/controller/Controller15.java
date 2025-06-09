@@ -159,6 +159,16 @@ public class Controller15 {
         int lastPage = (count - 1) / 5 + 1;
         model.addAttribute("lastPage", lastPage);
 
+        int rightPage = ((page - 1) / 10 + 1) * 10;
+        int leftPage = rightPage - 9;
+        int prevPage = leftPage - 10;
+        int nextPage = rightPage + 1;
+        rightPage = Math.min(rightPage, lastPage);  // rightPage는 lastPage보다 클 수 없다.
+        model.addAttribute("rightPage", rightPage);
+        model.addAttribute("leftPage", leftPage);
+        model.addAttribute("prevPage", prevPage);
+        model.addAttribute("nextPage", nextPage);
+
         ResultSet rs2 = selectStmt.executeQuery();
         List<CustomerDto> list = new ArrayList<>();
         while (rs2.next()) {
@@ -214,6 +224,17 @@ public class Controller15 {
         int count = rs1.getInt("count");
         int lastPage = (count - 1) / 5 + 1;
         model.addAttribute("lastPage", lastPage);
+        model.addAttribute("total", count);
+
+        int rightPage = ((page - 1) / 10 + 1) * 10;
+        int leftPage = rightPage - 9;
+        int prevPage = leftPage - 10;
+        int nextPage = rightPage + 1;
+        rightPage = Math.min(rightPage, lastPage);  // rightPage는 lastPage보다 클 수 없다.
+        model.addAttribute("rightPage", rightPage);
+        model.addAttribute("leftPage", leftPage);
+        model.addAttribute("prevPage", prevPage);
+        model.addAttribute("nextPage", nextPage);
 
         ResultSet rs2 = selectStmt.executeQuery();
         List<ProductsDTO> list = new ArrayList<>();
@@ -231,4 +252,5 @@ public class Controller15 {
 
         return "main15/sub4";
     }
+
 }

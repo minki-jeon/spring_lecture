@@ -46,12 +46,20 @@
     </tbody>
 </table>
 <div>
-    <span th:each="num : ${#numbers.sequence(1, lastPage)}">
+    <span th:if="${prevPage > 0}" >
+        <a th:if="${param.keyword == null}" th:href="@{/main15/sub3(page=${prevPage})}">이전 </a>
+        <a th:if="${param.keyword != null}" th:href="@{/main15/sub3(page=${prevPage}, keyword=${param.keyword})}">이전 </a>
+    </span>
+    <span th:each="num : ${#numbers.sequence(leftPage, rightPage)}">
         <a th:if="${param.keyword == null}" th:href="@{/main15/sub3(page=${num})}"
            th:text="${num}"></a>
         <a th:if="${param.keyword != null}" th:href="@{/main15/sub3(page=${num}, keyword=${param.keyword})}"
            th:text="${num}"></a>
         |
+    </span>
+    <span th:if="${nextPage <= lastPage}" >
+        <a th:if="${param.keyword == null}" th:href="@{/main15/sub3(page=${nextPage})}"> 다음</a>
+        <a th:if="${param.keyword != null}" th:href="@{/main15/sub3(page=${nextPage}, keyword=${param.keyword})}"> 다음</a>
     </span>
 </div>
 
