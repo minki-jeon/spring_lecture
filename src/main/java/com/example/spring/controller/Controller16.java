@@ -246,5 +246,69 @@ public class Controller16 {
         return "redirect:/main16/sub4";
     }
 
+    @GetMapping("sub5")
+    public String select1(Integer id, Model model) throws SQLException {
+        if (id != null) {
+            String sql = """
+                    SELECT * FROM Customers
+                    WHERE CustomerID = ?
+                    """;
+            String url = "jdbc:mysql://localhost:3306/w3schools";
+            String username = "root";
+            String password = "1234";
+            Connection connection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                CustomerDto customerDto = new CustomerDto();
+                customerDto.setId(resultSet.getInt("customerId"));
+                customerDto.setName(resultSet.getString("customerName"));
+                customerDto.setContactName(resultSet.getString("contactName"));
+                customerDto.setAddress(resultSet.getString("address"));
+                customerDto.setCity(resultSet.getString("city"));
+                customerDto.setPostalCode(resultSet.getString("postalCode"));
+                customerDto.setCountry(resultSet.getString("country"));
+                model.addAttribute("customer", customerDto);
+            }
+        }
+
+        return "main16/sub5";
+    }
+
+
+
+    @PostMapping("sub5")
+    public String update1(CustomerDto customerDto, RedirectAttributes rttr) throws SQLException {
+//        System.out.println("customerDto = " + customerDto);
+
+        String sql = """
+                UPDATE Customers
+                SET CustomerName = ?,
+                    ContactName = ?,
+                    Address = ?,
+                    City = ?,
+                    PostalCode = ?,
+                    Country = ?
+                WHERE CustomerID = ?
+                """;
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setString(1, customerDto.getName());
+        statement.setString(2, customerDto.getContactName());
+        statement.setString(3, customerDto.getAddress());
+        statement.setString(4, customerDto.getCity());
+        statement.setString(5, customerDto.getPostalCode());
+        statement.setString(6, customerDto.getCountry());
+        statement.setInt(7, customerDto.getId());
+
+        rttr.addAttribute("id", customerDto.getId());
+
+        return "redirect:/main16/sub5";
+    }
 
 }
