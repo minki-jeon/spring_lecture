@@ -67,11 +67,18 @@
             <input type="text" readonly th:value="*{phone}">
         </label>
     </div>
-
+    <!-- /*
     <div>
         <form method="post" th:action="@{/main16/sub4}">
             <input type="hidden" name="id" th:value="${supplier.id}">
             <button>삭제</button>
+        </form>
+    </div>
+    */ -->
+    <button form="delete-form">삭제</button>
+    <div style="display:none">
+        <form id="delete-form" method="post" th:action="@{/main16/sub4}">
+            <input type="text" name="id" th:value="${supplier.id}">
         </form>
     </div>
 </div>
