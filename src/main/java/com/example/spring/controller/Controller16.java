@@ -76,6 +76,7 @@ public class Controller16 {
         statement.executeUpdate();  // insert, update, delete
 
         //* 중복삽입 방지 - redirect를 통해 Get방식 요청 페이지로 이동
+        // -> PRG패턴(Post-Redirect-Get Pattern) 방식
 //        return "main16/sub1";
         return "redirect:/main16/sub1";
     }
@@ -185,7 +186,7 @@ public class Controller16 {
         statement.setInt(1, id);
         statement.executeUpdate();
 
-        // 삭제 이후에도 입력한 값 유지
+        // 삭제 이후에 입력한 값 다시 조회
         rttr.addAttribute("id", id);    // query string에 붙인다.
 
         // get방식 페이지로 요청
