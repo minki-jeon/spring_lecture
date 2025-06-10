@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>고객 정보 입력</h3>
+<hr>
+<form th:action="@{/main16/sub1}" method="post">
+    <div>
+        <label>
+            고객명
+            <input type="text" name="name">
+        </label>
+    </div>
+    <div>
+        <label>
+            계약명
+            <input type="text" name="contactName">
+        </label>
+    </div>
+    <div>
+        <label>
+            주소
+            <input type="text" name="address">
+        </label>
+    </div>
+    <div>
+        <label>
+            도시
+            <input type="text" name="city">
+        </label>
+    </div>
+    <div>
+        <label>
+            우편번호
+            <input type="text" name="postalCode">
+        </label>
+    </div>
+    <div>
+        <label>
+            국가
+            <input type="text" name="country">
+        </label>
+    </div>
+
+    <div>
+        <button>등록</button>
+    </div>
+</form>
+<hr>
+
+</body>
+</html>
