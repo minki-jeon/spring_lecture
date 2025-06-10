@@ -1,25 +1,53 @@
 package com.example.spring.controller;
 
 import com.example.spring.dto.CustomerDto;
+import com.example.spring.dto.SuppliersDTO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("main16")
 public class Controller16 {
 
     @GetMapping("sub1")
-    public String form1(){
+    public String form1(Model model) throws SQLException {
+        String sql = """
+                SELECT *
+                FROM Customers
+                ORDER BY CustomerID DESC
+                """;
+
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        List<CustomerDto> customerList = new ArrayList<>();
+        while (resultSet.next()) {
+            CustomerDto customerDto = new CustomerDto();
+            customerDto.setId(resultSet.getInt("customerId"));
+            customerDto.setName(resultSet.getString("customerName"));
+            customerDto.setContactName(resultSet.getString("contactName"));
+            customerDto.setAddress(resultSet.getString("address"));
+            customerDto.setCity(resultSet.getString("city"));
+            customerDto.setPostalCode(resultSet.getString("postalCode"));
+            customerDto.setCountry(resultSet.getString("country"));
+            customerList.add(customerDto);
+        }
+        model.addAttribute("customerList", customerList);
+
 
         return "main16/sub1";
     }
+
     @PostMapping("sub1")
     public String process(CustomerDto customer) throws SQLException {
 //        System.out.println(customer);
@@ -46,6 +74,65 @@ public class Controller16 {
 //        statement.execute();  // select
         statement.executeUpdate();  // insert, update, delete
 
-        return "main16/sub1";
+        //* 중복삽입 방지 - redirect를 통해 Get방식 요청 페이지로 이동
+//        return "main16/sub1";
+        return "redirect:/main16/sub1";
+    }
+
+    @GetMapping("sub2")
+    public String form2(Model model) throws SQLException {
+        String sql = """
+                SELECT * 
+                FROM Suppliers
+                ORDER BY SupplierID DESC
+                """;
+
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        List<SuppliersDTO> supplierList = new ArrayList<>();
+        while (resultSet.next()) {
+            SuppliersDTO supplierDto = new SuppliersDTO();
+            supplierDto.setId(resultSet.getInt("supplierId"));
+            supplierDto.setName(resultSet.getString("supplierName"));
+            supplierDto.setContactName(resultSet.getString("contactName"));
+            supplierDto.setAddress(resultSet.getString("address"));
+            supplierDto.setCity(resultSet.getString("city"));
+            supplierDto.setPostalCode(resultSet.getString("postalCode"));
+            supplierDto.setCountry(resultSet.getString("country"));
+            supplierDto.setPhone(resultSet.getString("phone"));
+            supplierList.add(supplierDto);
+        }
+        model.addAttribute("supplierList", supplierList);
+
+        return "main16/sub2";
+    }
+
+    @PostMapping("sub2")
+    public String process2(SuppliersDTO supplier) throws SQLException {
+        String sql = """
+                INSERT INTO Suppliers
+                (SupplierName, ContactName, Address, City, PostalCode, Country, Phone)
+                VALUES
+                (?, ?, ?, ?, ?, ?, ?)
+                """;
+        String url = "jdbc:mysql://localhost:3306/w3schools";
+        String username = "root";
+        String password = "1234";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, supplier.getName());
+        statement.setString(2, supplier.getContactName());
+        statement.setString(3, supplier.getAddress());
+        statement.setString(4, supplier.getCity());
+        statement.setString(5, supplier.getPostalCode());
+        statement.setString(6, supplier.getCountry());
+        statement.setString(7, supplier.getPhone());
+        statement.executeUpdate();
+
+        return "redirect:/main16/sub2";
     }
 }
