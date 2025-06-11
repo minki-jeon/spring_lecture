@@ -141,3 +141,12 @@ CREATE TABLE table12
     col7 DATETIME
 );
 SELECT * FROM table12;
+
+
+CREATE TABLE table13
+(
+    name       VARCHAR(20),
+    birth_date DATE,
+    score      DEC(8, 2),
+    born_at    DATETIME
+);
