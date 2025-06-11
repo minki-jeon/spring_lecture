@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>데이터 타입별 입력 practice</h3>
+<form th:action="@{/main17/sub7}" method="post">
+    <div>
+        <input type="text" placeholder="텍스트" name="name">
+    </div>
+    <div>
+        <input type="date" placeholder="날짜" name="birthDate">
+    </div>
+    <div>
+        <input type="number" placeholder="소숫점2자리" name="score" step="0.01">
+    </div>
+    <div>
+        <input type="datetime-local" placeholder="날짜 시간" name="bornAt">
+    </div>
+    <div>
+        <input type="submit">
+    </div>
+</form>
+</body>
+</html>
