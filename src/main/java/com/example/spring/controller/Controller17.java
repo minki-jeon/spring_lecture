@@ -11,6 +11,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("main17")
@@ -218,6 +219,7 @@ public class Controller17 {
         Connection connection = DriverManager.getConnection(url, username, password);
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
+        var list = new ArrayList<Dto7>();
         while (resultSet.next()) {
             Dto7 dto7 = new Dto7();
             dto7.setName(resultSet.getString("name"));
@@ -225,8 +227,10 @@ public class Controller17 {
             dto7.setScore(resultSet.getDouble("score"));
             dto7.setBornAt(resultSet.getTimestamp("born_at").toLocalDateTime());
 //            model.addAttribute("dto7", dto7);
-            System.out.println("dto7 = " + dto7);
+//            System.out.println("dto7 = " + dto7);
+            list.add(dto7);
         }
+        model.addAttribute("list", list);
 
         return "main17/sub7";
     }
