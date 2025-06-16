@@ -45,4 +45,10 @@ public class Controller20 {
         service2.process5();
         return "main20/sub5";
     }
+
+    @GetMapping("sub6")
+    public String sub6() {
+        service2.process6();
+        return "main20/sub6";
+    }
 }

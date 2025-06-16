@@ -1,13 +1,7 @@
 package com.example.spring.service;
 
-import com.example.spring.entity.Entity1;
-import com.example.spring.entity.Entity2;
-import com.example.spring.entity.Entity3;
-import com.example.spring.entity.Entity4;
-import com.example.spring.repository.Entity1Repository;
-import com.example.spring.repository.Entity2Repository;
-import com.example.spring.repository.Entity3Repository;
-import com.example.spring.repository.Entity4Repository;
+import com.example.spring.entity.*;
+import com.example.spring.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +13,7 @@ public class Service2 {
     private final Entity2Repository entity2Repository;
     private final Entity3Repository entity3Repository;
     private final Entity4Repository entity4Repository;
+    private final Entity5Repository entity5Repository;
 
     public void process1() {
         System.out.println("실제 업무 로직 (Business Logic, CRUD) 영역");
@@ -63,5 +58,10 @@ public class Service2 {
     public void process5() {
         Entity4 res = entity4Repository.findById(1).get();
         System.out.println(res);
+    }
+
+    public void process6() {
+        Entity5 entity5 = entity5Repository.findById(1).get();
+        System.out.println(entity5);
     }
 }
