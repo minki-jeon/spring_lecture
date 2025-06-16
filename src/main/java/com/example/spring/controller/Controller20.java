@@ -110,6 +110,7 @@ public class Controller20 {
 
     }
 
+    // JPA INSERT
     // /main20/sub15?name=choi&score=88.9&city=dokdo
     @GetMapping("sub15")
     public String sub15(String name, Double score, String city) {
@@ -117,6 +118,7 @@ public class Controller20 {
         return "main20/sub15";
     }
 
+    // JPA INSERT
     // ?address=신촌&price=5678&inserted=2010-10-10T12:13:14
     @GetMapping("sub16")
     public String sub16(String address, Integer price, LocalDateTime inserted) {
@@ -124,16 +126,32 @@ public class Controller20 {
         return "main20/sub16";
     }
 
+    // JPA UPDATE
     @GetMapping("sub17")
     public String sub17(Integer id, Double score) {
         service2.process14(id, score);
         return "main20/sub17";
     }
 
+    // JPA UPDATE
     // table15 UPDATE  /main20/sub18?id=1&address=강남
     @GetMapping("sub18")
     public String sub18(Integer id, String address) {
         service2.process15(id, address);
         return "main20/sub18";
+    }
+
+    // JPA DELETE
+    @GetMapping("sub19")
+    public String sub19(Integer id) {
+        service2.process16(id);
+        return "main20/sub19";
+    }
+
+    // JPA DELETE
+    @GetMapping("sub20")
+    public String sub20(Integer id) {
+        service2.process17(id);
+        return "main20/sub20";
     }
 }

@@ -156,4 +156,13 @@ public class Service2 {
         data.setAddress(address);
         entity15Repository.save(data);
     }
+
+    // JPA DELETE
+    public void process16(Integer id) {
+        entity14Repository.deleteById(id);
+    }
+
+    public void process17(Integer id) {
+        entity15Repository.deleteById(id);
+    }
 }
