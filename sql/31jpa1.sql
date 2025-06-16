@@ -171,3 +171,29 @@ CREATE TABLE my_table11
     score       DEC(10, 2),
     inserted_at DATETIME
 );
+
+
+CREATE TABLE my_table14
+(
+    id    INT AUTO_INCREMENT NOT NULL,
+    name  VARCHAR(255)       NULL,
+    score DEC(10, 2)         NULL,
+    city  VARCHAR(255)       NULL,
+    CONSTRAINT pk_my_table14 PRIMARY KEY (id)
+);
+
+INSERT INTO my_table14 (name, score, city)
+VALUES
+    ('kim', 88.8, 'seoul'),
+    ('lee', 77.7, 'jeju'),
+    ('park', 33.3, 'busan');
+SELECT * FROM my_table14;
+
+CREATE TABLE my_table15
+(
+    id          INT AUTO_INCREMENT NOT NULL,
+    address     VARCHAR(255)       NULL,
+    price       INT                NULL,
+    inserted_at datetime           NULL,
+    CONSTRAINT pk_my_table15 PRIMARY KEY (id)
+);
