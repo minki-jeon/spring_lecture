@@ -80,7 +80,7 @@ CREATE TABLE my_table5
 INSERT INTO my_table5(address, hired_date, inserted_at, height, score)
 VALUES ('뉴욕', '1976-09-10', '2025-01-02 17:19:22', 200.34, 567);
 
-
+# DB Table to Entity 자동생성
 CREATE TABLE my_table6
 (
     id          INT PRIMARY KEY AUTO_INCREMENT,
@@ -91,4 +91,51 @@ CREATE TABLE my_table6
     started_at  TIME,
     inserted_at DATETIME
 );
+CREATE TABLE my_table7
+(
+    id          INT PRIMARY KEY AUTO_INCREMENT,
+    password    VARCHAR(30),
+    name        VARCHAR(30),
+    nickname    VARCHAR(30),
+    point       BIGINT,
+    birth_date  DATE,
+    status      VARCHAR(10),
+    login_count INT,
+    created_at  DATETIME,
+    updated_at  DATETIME,
+    session_id  VARCHAR(50),
+    use_yn      VARCHAR(1),
+    del_yn      VARCHAR(1)
+);
 
+
+# Java Entity to SQL Query(DDL) 자동생성
+CREATE TABLE my_table8
+(
+    id          INT AUTO_INCREMENT NOT NULL,
+    address     VARCHAR(255)       NULL,
+    salary      DEC(10, 2)             NULL,
+    inserted_at datetime           NULL,
+    hire_date   date               NULL,
+    CONSTRAINT pk_my_table8 PRIMARY KEY (id)
+);
+CREATE TABLE my_table9
+(
+    id          INT AUTO_INCREMENT NOT NULL,
+    password    VARCHAR(255)       NULL,
+    name        VARCHAR(255)       NULL,
+    nickname    VARCHAR(255)       NULL,
+    point       BIGINT             NULL,
+#     exp         DOUBLE             NULL,
+    exp         DEC(5,2)           NULL,
+    gender      CHAR               NULL,
+    birth_date  date               NULL,
+    status      VARCHAR(255)       NULL,
+    login_count INT                NULL,
+    created_at  datetime           NULL,
+    updated_at  datetime           NULL,
+    session_id  VARCHAR(255)       NULL,
+    use_yn      CHAR               NULL,
+    del_yn      CHAR               NULL,
+    CONSTRAINT pk_my_table9 PRIMARY KEY (id)
+);
