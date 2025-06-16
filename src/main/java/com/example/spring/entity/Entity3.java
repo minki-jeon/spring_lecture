@@ -13,15 +13,20 @@ import lombok.ToString;
 public class Entity3 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
+    // 클래스의 field명과 table의 컬럼명이 동일하다면 @Column 생략 가능
+//    @Column(name="email")
+    private String email;
+//    @Column(name="info")
+    private String info;
+//    @Column(name="nick")
+    private String nick;
+    private String country;
 
-    @Column(name="email")
-    String email;
+    // lowerCamelCase
+//    private String home_address;
+//    @Column(name = "home_address")
+    private String homeAddress;
 
-    @Column(name="info")
-    String info;
-
-    @Column(name="nick")
-    String nick;
-
+    private String workAddress;
 }
