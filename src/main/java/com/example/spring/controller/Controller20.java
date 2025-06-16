@@ -1,10 +1,14 @@
 package com.example.spring.controller;
 
+import com.example.spring.entity.Entity14;
 import com.example.spring.service.Service2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("main20")
@@ -80,5 +84,56 @@ public class Controller20 {
         service2.process8();
 
         return "main20/sub11";
+    }
+
+    // 매핑되는 Table 없이 실행
+    @GetMapping("sub12")
+    public String sub12() {
+        service2.process9();
+        return "main20/sub12";
+    }
+
+    // Entity13, Entity13Repository, request handler method, srvice.process10(), findById() 호출 => Table 존재하지 않다는 메시지 확인
+    @GetMapping("sub13")
+    public String sub13() {
+        service2.process10();
+        return "main20/sub13";
+    }
+
+    @GetMapping("sub14")
+    public String sub14(Integer id, Model model) {
+        Entity14 data = service2.process11(id);
+
+        model.addAttribute("data", data);
+        System.out.println(data);
+        return "main20/sub14";
+
+    }
+
+    // /main20/sub15?name=choi&score=88.9&city=dokdo
+    @GetMapping("sub15")
+    public String sub15(String name, Double score, String city) {
+        service2.process12(name, score, city);
+        return "main20/sub15";
+    }
+
+    // ?address=신촌&price=5678&inserted=2010-10-10T12:13:14
+    @GetMapping("sub16")
+    public String sub16(String address, Integer price, LocalDateTime inserted) {
+        service2.process13(address, price, inserted);
+        return "main20/sub16";
+    }
+
+    @GetMapping("sub17")
+    public String sub17(Integer id, Double score) {
+        service2.process14(id, score);
+        return "main20/sub17";
+    }
+
+    // table15 UPDATE  /main20/sub18?id=1&address=강남
+    @GetMapping("sub18")
+    public String sub18(Integer id, String address) {
+        service2.process15(id, address);
+        return "main20/sub18";
     }
 }
