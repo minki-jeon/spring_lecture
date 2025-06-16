@@ -80,3 +80,15 @@ CREATE TABLE my_table5
 INSERT INTO my_table5(address, hired_date, inserted_at, height, score)
 VALUES ('뉴욕', '1976-09-10', '2025-01-02 17:19:22', 200.34, 567);
 
+
+CREATE TABLE my_table6
+(
+    id          INT PRIMARY KEY AUTO_INCREMENT,
+    city        VARCHAR(30),
+    score       DEC(10, 2),
+    weight      BIGINT,
+    birth_date  DATE,
+    started_at  TIME,
+    inserted_at DATETIME
+);
+
