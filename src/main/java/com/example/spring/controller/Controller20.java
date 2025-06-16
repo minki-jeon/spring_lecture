@@ -51,4 +51,34 @@ public class Controller20 {
         service2.process6();
         return "main20/sub6";
     }
+
+    @GetMapping("sub10")
+    public String sub10() {
+        // Spring Data JPA
+        // Entity : 테이블과 매핑되는 클래스(객체)
+        // Repository : Entity를 이용한 CRUD 메소드 제공하는 Class / Interface
+        //      SELECT Method : find~(), get~()
+        //      UPDATE Method : save~()
+        //      DELETE Method : delete~()
+        //      INSERT Method : save~()
+
+        // Repository 생성 : JpaRepository<T, ID> 인터페이스 상속받는 클래스를 생성
+        // 타입파라미터 T: CRUD 대상 테이블에 매핑되는 Entity
+        // 타입파라미터 ID : Entity의 PK 자료형
+
+        //  Spring은 Repository 인터페이스에 있는 메소드를 활용하여 연결, statement, ResultSet 처리하는 구현 코드를 생성
+
+        service2.process7();
+
+        return "main20/sub10";
+
+    }
+
+    @GetMapping("sub11")
+    public String sub11() {
+
+        service2.process8();
+
+        return "main20/sub11";
+    }
 }

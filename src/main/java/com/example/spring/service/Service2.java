@@ -5,6 +5,8 @@ import com.example.spring.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class Service2 {
@@ -14,6 +16,8 @@ public class Service2 {
     private final Entity3Repository entity3Repository;
     private final Entity4Repository entity4Repository;
     private final Entity5Repository entity5Repository;
+    private final Entity10Repository entity10Repository;
+    private final Entity11Repository entity11Repository;
 
     public void process1() {
         System.out.println("실제 업무 로직 (Business Logic, CRUD) 영역");
@@ -64,4 +68,23 @@ public class Service2 {
         Entity5 entity5 = entity5Repository.findById(1).get();
         System.out.println(entity5);
     }
+
+    public void process7() {
+        // findById : 기본키(id)로 하나의 recode(row)를 조회
+//        Entity10 entity10 = entity10Repository.findById(1).get();
+        Optional<Entity10> data = entity10Repository.findById(1);
+        System.out.println(data.isPresent());       // (데이터가 존재하는지 확인)
+        System.out.println(data.isEmpty());         // (데이터가 존재하지 않는지 확인)
+    }
+
+    // entity11Repository.findById() / process8() / Controller - request handler method
+    public void process8() {
+        Optional<Entity11> data = entity11Repository.findById(1);
+        System.out.println(data.isPresent());
+        System.out.println(data.isEmpty());
+
+    }
+
+
+
 }
