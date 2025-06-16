@@ -139,3 +139,35 @@ CREATE TABLE my_table9
     del_yn      CHAR               NULL,
     CONSTRAINT pk_my_table9 PRIMARY KEY (id)
 );
+
+
+
+CREATE TABLE my_table10
+(
+    id         INT PRIMARY KEY AUTO_INCREMENT,
+    name       VARCHAR(30),
+    city       VARCHAR(30),
+    birth_date DATE
+);
+
+select
+    e1_0.id,
+    e1_0.birth_date,
+    e1_0.city,
+    e1_0.name
+from
+    my_table10 e1_0
+where
+    e1_0.id=?;
+
+SELECT * FROM my_table10 WHERE id = 1;
+
+INSERT INTO my_table10 (name, city, birth_date) VALUE ('son', 'seoul', '1981-12-13');
+
+CREATE TABLE my_table11
+(
+    id          INT PRIMARY KEY AUTO_INCREMENT,
+    address     VARCHAR(30),
+    score       DEC(10, 2),
+    inserted_at DATETIME
+);
