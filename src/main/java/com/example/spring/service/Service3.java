@@ -2,8 +2,10 @@ package com.example.spring.service;
 
 import com.example.spring.entity.Entity16;
 import com.example.spring.entity.Entity17;
+import com.example.spring.entity.Entity18;
 import com.example.spring.repository.Entity16Repository;
 import com.example.spring.repository.Entity17Repository;
+import com.example.spring.repository.Entity18Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ public class Service3 {
 
     private final Entity16Repository entity16Repository;
     private final Entity17Repository entity17Repository;
+    private final Entity18Repository entity18Repository;
 
     public void action1() {
         // findById(pk) : pk에 해당하는 하나의 레코드 조회
@@ -140,5 +143,38 @@ public class Service3 {
         for (Entity17 entity17 : data) {
             System.out.println(entity17);
         }
+    }
+
+    public void action17() {
+        System.out.println("country=======================================================");
+        List<Entity18> uk = entity18Repository.findByCountry("uk");
+        for (Entity18 entity18 : uk) {
+            System.out.println(entity18);
+        }
+
+        System.out.println("city=======================================================");
+        List<Entity18> osaka = entity18Repository.findByCity("osaka");
+        for (Entity18 entity18 : osaka) {
+            System.out.println(entity18);
+        }
+
+        System.out.println("In=======================================================");
+        List<Entity18> byCountryIn = entity18Repository.findByCountryIn(List.of("usa", "japan", "uk"));
+        for (Entity18 entity18 : byCountryIn) {
+            System.out.println(entity18);
+        }
+
+        System.out.println("like=======================================================");
+        List<Entity18> list4 = entity18Repository.findBySupplierNameLike("%an%");
+        for (Entity18 entity18 : list4) {
+            System.out.println(entity18);
+        }
+
+        System.out.println("contains=======================================================");
+        List<Entity18> list5 = entity18Repository.findBySupplierNameContains("an");
+        for (Entity18 entity18 : list5) {
+            System.out.println(entity18);
+        }
+
     }
 }
