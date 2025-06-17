@@ -78,4 +78,18 @@ public class Service3 {
             System.out.println(entity17);
         }
     }
+
+    public void action8(String keyword) {
+        List<Entity16> data = entity16Repository.query4("%" + keyword + "%");
+        for (Entity16 entity16 : data) {
+            System.out.println(entity16);
+        }
+    }
+
+    public void action9(String keyword) {
+        List<Entity17> data = entity17Repository.query2("%" + keyword + "%");
+        for (Entity17 entity17 : data) {
+            System.out.println(entity17);
+        }
+    }
 }
