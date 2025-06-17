@@ -33,5 +33,9 @@ public class Service3 {
     public void action3() {
         List<Entity17> list = entity17Repository.findAll();
         System.out.println(list.size());
+        
+        for (Entity17 entity17 : list) {
+            System.out.println(entity17);
+        }
     }
 }
