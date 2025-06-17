@@ -32,4 +32,12 @@ public class Controller21 {
         service3.action3();
         return "main21/sub3";
     }
+
+    // /main21/sub4?country=mexico
+    @GetMapping("sub4")
+    public String sub4(String country) {
+        service3.action4(country);
+
+        return "main21/sub4";
+    }
 }

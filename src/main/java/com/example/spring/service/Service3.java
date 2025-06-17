@@ -38,4 +38,17 @@ public class Service3 {
             System.out.println(entity17);
         }
     }
+
+    public void action4(String country) {
+        /*
+        SELECT *
+        FROM customer
+        WHERE country = 'usa';
+         */
+        List<Entity16> data = entity16Repository.query1(country);
+        System.out.println("data.size() = " + data.size());
+        for (Entity16 entity16 : data) {
+            System.out.println(entity16);
+        }
+    }
 }
