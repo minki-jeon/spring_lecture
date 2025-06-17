@@ -57,3 +57,17 @@ SELECT suppliername,
        phone
 FROM w3schools.Suppliers;
 SELECT * FROM supplier;
+
+
+DESC w3schools.Products;
+CREATE TABLE product(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(255),
+    supplier_id INT,
+    category_id INT,
+    unit VARCHAR(255),
+    price DEC(10, 2)
+);
+INSERT INTO product (product_name, supplier_id, category_id, unit, price)
+SELECT ProductName, SupplierID, CategoryID, Unit, Price FROM w3schools.Products;
+SELECT * FROM product;
