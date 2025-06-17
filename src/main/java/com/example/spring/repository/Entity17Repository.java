@@ -14,4 +14,12 @@ public interface Entity17Repository extends JpaRepository<Entity17, Integer> {
            WHERE birth_date BETWEEN :start AND :end
           """, nativeQuery = true)
     List<Entity17> query1(LocalDate start, LocalDate end);
+
+    @Query(value = """
+            SELECT *
+            FROM jpa.employee
+            WHERE last_name LIKE :keyword
+               OR first_name LIKE :keyword
+            """, nativeQuery = true)
+    List<Entity17> query2(String keyword);
 }

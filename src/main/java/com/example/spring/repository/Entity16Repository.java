@@ -35,4 +35,10 @@ public interface Entity16Repository extends JpaRepository<Entity16, Integer> {
             """, nativeQuery = true)
     List<Entity16> query3(String city1, String city2);
 
+    @Query(value = """
+            select *
+            FROM jpa.customer
+            WHERE customer_name LIKE :keyword
+            """, nativeQuery = true)
+    List<Entity16> query4(String keyword);
 }
