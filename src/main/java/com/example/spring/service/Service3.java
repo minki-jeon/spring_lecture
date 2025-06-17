@@ -231,4 +231,41 @@ public class Service3 {
         }
 
     }
+
+    public void action19() {
+        System.out.println("SQL / ORDER BY ================================================================");
+        List<Entity19> list1 = entity19Repository.query1(6);
+        for (Entity19 entity19 : list1) {
+            System.out.println(entity19);
+        }
+
+        System.out.println("JPQL / ORDER BY ================================================================");
+        List<Entity19> list2 = entity19Repository.query2(5);
+        for (Entity19 entity19 : list2) {
+            System.out.println(entity19);
+        }
+
+        System.out.println("QueryMethod / ORDER BY ================================================================");
+        for (Entity19 entity19 : entity19Repository.findByCategoryIdOrderByPrice(4)) {
+            System.out.println(entity19);
+        }
+        for (Entity19 entity19 : entity19Repository.findByCategoryIdOrderByPriceAsc(3)) {
+            System.out.println(entity19);
+        }
+        for (Entity19 entity19 : entity19Repository.findByCategoryIdOrderByPriceDesc(2)) {
+            System.out.println(entity19);
+        }
+
+    }
+
+    public void action20() {
+        System.out.println("QueryMethod / Supplier Order By ======================================================");
+        for (Entity18 entity18 : entity18Repository.findByCountryInOrderBySupplierName(List.of("uk", "japan"))) {
+            System.out.println(entity18);
+        }
+        for (Entity18 entity18 : entity18Repository.findBySupplierNameLikeOrderBySupplierNameDesc("%an%")) {
+            System.out.println(entity18);
+        }
+
+    }
 }
