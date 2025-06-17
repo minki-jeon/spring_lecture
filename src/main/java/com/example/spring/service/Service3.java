@@ -120,4 +120,25 @@ public class Service3 {
             System.out.println(entity17);
         }
     }
+
+    public void action14(String country) {
+        List<Entity16> data = entity16Repository.findByCountry(country);
+        for (Entity16 entity16 : data) {
+            System.out.println(entity16);
+        }
+    }
+
+    public void action15(String city) {
+        List<Entity16> data = entity16Repository.findByCity(city);
+        for (Entity16 entity16 : data) {
+            System.out.println(entity16);
+        }
+    }
+
+    public void action16(LocalDate start, LocalDate end) {
+        List<Entity17> data = entity17Repository.findByBirthDateBetween(start, end);
+        for (Entity17 entity17 : data) {
+            System.out.println(entity17);
+        }
+    }
 }
