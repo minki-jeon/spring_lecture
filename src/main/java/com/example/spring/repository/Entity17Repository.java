@@ -34,4 +34,9 @@ public interface Entity17Repository extends JpaRepository<Entity17, Integer> {
             """)
     List<Entity17> query3(String keyword);
 //    List<Entity17> query3(@Param("keyword") String keyword);  // @Param 권장되는 방법
+
+
+    List<Entity17> findByBirthDateBetween(LocalDate start, LocalDate end);
+
+
 }

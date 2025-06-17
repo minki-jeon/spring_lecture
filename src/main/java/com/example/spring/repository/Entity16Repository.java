@@ -76,4 +76,7 @@ public interface Entity16Repository extends JpaRepository<Entity16, Integer> {
     List<Entity16> query7(String keyword);
 
 
+    // sql, jpql 작성하지않고 메소드명으로도 실행된다.
+    List<Entity16> findByCountry(String country);
+    List<Entity16> findByCity(String city);
 }
