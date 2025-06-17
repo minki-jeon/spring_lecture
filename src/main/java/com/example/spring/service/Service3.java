@@ -3,9 +3,11 @@ package com.example.spring.service;
 import com.example.spring.entity.Entity16;
 import com.example.spring.entity.Entity17;
 import com.example.spring.entity.Entity18;
+import com.example.spring.entity.Entity19;
 import com.example.spring.repository.Entity16Repository;
 import com.example.spring.repository.Entity17Repository;
 import com.example.spring.repository.Entity18Repository;
+import com.example.spring.repository.Entity19Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ public class Service3 {
     private final Entity16Repository entity16Repository;
     private final Entity17Repository entity17Repository;
     private final Entity18Repository entity18Repository;
+    private final Entity19Repository entity19Repository;
 
     public void action1() {
         // findById(pk) : pk에 해당하는 하나의 레코드 조회
@@ -174,6 +177,57 @@ public class Service3 {
         List<Entity18> list5 = entity18Repository.findBySupplierNameContains("an");
         for (Entity18 entity18 : list5) {
             System.out.println(entity18);
+        }
+
+    }
+
+    public void action18() {
+        System.out.println("categoryId============================================================");
+        List<Entity19> byCategoryId = entity19Repository.findByCategoryId(1);
+        for (Entity19 entity19 : byCategoryId) {
+            System.out.println(entity19);
+        }
+
+        System.out.println("supplierId============================================================");
+        List<Entity19> bySupplierId = entity19Repository.findBySupplierId(1);
+        for (Entity19 entity19 : bySupplierId) {
+            System.out.println(entity19);
+        }
+
+        System.out.println("priceBetween============================================================");
+        List<Entity19> byPriceBetween = entity19Repository.findByPriceBetween(50.5, 75.8);
+        for (Entity19 entity19 : byPriceBetween) {
+            System.out.println(entity19);
+        }
+
+        System.out.println("byPriceGreaterThanEqualAndPriceLessThanEqual============================================================");
+        List<Entity19> byPriceGreaterThanEqualAndPriceLessThanEqual = entity19Repository.findByPriceGreaterThanEqualAndPriceLessThanEqual(100.5, 155.8);
+        for (Entity19 entity19 : byPriceGreaterThanEqualAndPriceLessThanEqual) {
+            System.out.println(entity19);
+        }
+
+        System.out.println("price>= ============================================================");
+        List<Entity19> byPriceGreaterThanEqual = entity19Repository.findByPriceGreaterThanEqual(200.5);
+        for (Entity19 entity19 : byPriceGreaterThanEqual) {
+            System.out.println(entity19);
+        }
+
+        System.out.println("categoryIdIn============================================================");
+        List<Entity19> byCategoryIdIn = entity19Repository.findByCategoryIdIn(List.of(6, 7));
+        for (Entity19 entity19 : byCategoryIdIn) {
+            System.out.println(entity19);
+        }
+
+        System.out.println("productNameLike============================================================");
+        List<Entity19> byProductNameLike = entity19Repository.findByProductNameLike("%an%");
+        for (Entity19 entity19 : byProductNameLike) {
+            System.out.println(entity19);
+        }
+
+        System.out.println("productNameContains============================================================");
+        List<Entity19> byProductNameContains = entity19Repository.findByProductNameContains("an");
+        for (Entity19 entity19 : byProductNameContains) {
+            System.out.println(entity19);
         }
 
     }
