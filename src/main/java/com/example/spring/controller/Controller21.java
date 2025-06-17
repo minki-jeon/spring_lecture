@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("main21")
@@ -39,5 +41,34 @@ public class Controller21 {
         service3.action4(country);
 
         return "main21/sub4";
+    }
+
+    // /main21/sub4?city=berlin
+    // service3.action5()
+    // entity16Repository.query2()
+    @GetMapping("sub5")
+    public String sub5(String city) {
+        service3.action5(city);
+
+        return "main21/sub4";
+    }
+
+    // /main21/sub6?city1=london&city2=berlin
+    @GetMapping("sub6")
+    public String sub6(String city1, String city2) {
+        service3.action6(city1, city2);
+
+        return "main21/sub6";
+    }
+
+    // /main21/sub7?start=1950-01-01&end=1959-12-31
+    // controller.sub7()
+    // service.action7()
+    // entity17repository.query1()
+    // SELECT * FROM employee WHERE birth_date BETWEEN :start AND :end
+    @GetMapping("sub7")
+    public String sub7(LocalDate start, LocalDate end) {
+        service3.action7(start, end);
+        return "main21/sub7";
     }
 }
