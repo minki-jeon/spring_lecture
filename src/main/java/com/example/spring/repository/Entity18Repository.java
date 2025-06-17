@@ -43,4 +43,11 @@ public interface Entity18Repository extends JpaRepository<Entity18, Integer> {
      */
     List<Entity18> findByCountryIn(List<String> country);
 
+
+    // SELECT * FROM supplier WHERE country IN (?, ?, ?) ORDER BY supplier_name
+    List<Entity18> findByCountryInOrderBySupplierName(List<String> country);
+
+    // SELECT * FROM supplier WHERE supplier_name LIKE :keyword ORDER BY supplier_name DESC
+    List<Entity18> findBySupplierNameLikeOrderBySupplierNameDesc(String keyword);
+
 }
