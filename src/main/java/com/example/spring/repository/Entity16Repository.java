@@ -19,4 +19,20 @@ public interface Entity16Repository extends JpaRepository<Entity16, Integer> {
             WHERE country = :country
             """, nativeQuery = true)
     List<Entity16> query1(String country);
+
+    @Query(value = """
+            SELECT *
+            FROM jpa.customer
+            WHERE city = :city
+            """, nativeQuery = true)
+    List<Entity16> query2(String city);
+
+    @Query(value = """
+            SELECT *
+            FROM jpa.customer
+            WHERE city = :city1
+               OR city = :city2
+            """, nativeQuery = true)
+    List<Entity16> query3(String city1, String city2);
+
 }
