@@ -81,11 +81,37 @@ public class Controller21 {
         return "main21/sub8";
     }
 
-    // get /main21/sub8?keyword=an
+    // /main21/sub9?keyword=an
     // 직원 이름에 an이 포함된 직원들 조회
     @GetMapping("sub9")
     public String sub9(String keyword) {
         service3.action9(keyword);
         return "main21/sub9";
     }
+
+    // /main21/sub10?country=uk
+    @GetMapping("sub10")
+    public String sub10(String country) {
+        service3.action10(country);
+        return "main21/sub10";
+    }
+
+    @GetMapping("sub11")
+    public String sub11(String city) {
+        service3.action11(city);
+        return "main21/sub11";
+    }
+
+    @GetMapping("sub12")
+    public String sub12(String keyword) {
+        service3.action12(keyword);
+        return "main21/sub12";
+    }
+
+    @GetMapping("sub13")
+    public String sub13(String keyword) {
+        service3.action13(keyword);
+        return "main21/sub13";
+    }
+
 }
