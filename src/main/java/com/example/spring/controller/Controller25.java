@@ -69,4 +69,10 @@ public class Controller25 {
         service7.action8(id);
         return "main25/sub8";
     }
+
+    @GetMapping("sub9")
+    public String sub9(Integer id) {
+        service7.action9(id);
+        return "main25/sub9";
+    }
 }
