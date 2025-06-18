@@ -90,3 +90,21 @@ CREATE TABLE my_table26
     book_title VARCHAR(255) NOT NULL,
     CONSTRAINT pk_my_table26 PRIMARY KEY (book_type, book_title)
 );
+
+
+# foreign key (외래키, 참조키, FK)
+CREATE TABLE my_table27
+(
+    id            INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(30),
+    info          VARCHAR(1000)
+);
+CREATE TABLE my_table28
+(
+    id           INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(30),
+    price        INT,
+    unit         VARCHAR(30),
+    category_id  INT NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES my_table27 (id)
+);
