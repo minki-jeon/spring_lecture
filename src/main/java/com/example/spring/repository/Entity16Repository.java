@@ -1,6 +1,8 @@
 package com.example.spring.repository;
 
 import com.example.spring.entity.Entity16;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -79,4 +81,9 @@ public interface Entity16Repository extends JpaRepository<Entity16, Integer> {
     // sql, jpql 작성하지않고 메소드명으로도 실행된다.
     List<Entity16> findByCountry(String country);
     List<Entity16> findByCity(String city);
+
+    Page<Entity16> findByCountry(String country, PageRequest pageRequest);
+
+    List<Entity16> findByCustomerNameContainingOrContactNameContaining(String keyword1, String keyword2);
+    Page<Entity16> findByCustomerNameContainingOrContactNameContaining(String keyword1, String keyword2, PageRequest id);
 }
