@@ -92,6 +92,7 @@ CREATE TABLE my_table26
 );
 
 
+# 카테고리 정보
 # foreign key (외래키, 참조키, FK)
 CREATE TABLE my_table27
 (
@@ -99,6 +100,7 @@ CREATE TABLE my_table27
     category_name VARCHAR(30),
     info          VARCHAR(1000)
 );
+# 상품 정보(카테고리 참조)
 CREATE TABLE my_table28
 (
     id           INT PRIMARY KEY AUTO_INCREMENT,
@@ -107,4 +109,22 @@ CREATE TABLE my_table28
     unit         VARCHAR(30),
     category_id  INT NOT NULL,
     FOREIGN KEY (category_id) REFERENCES my_table27 (id)
+);
+
+# 직원정보
+CREATE TABLE my_table29
+(
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(10),
+    last_name  VARCHAR(10),
+    birth_date DATE
+);
+# 주문정보(직원 참조)
+CREATE TABLE my_table30
+(
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    order_date  DATE,
+    info        VARCHAR(20),
+    employee_id INT,
+    FOREIGN KEY (employee_id) REFERENCES my_table29 (id)
 );
