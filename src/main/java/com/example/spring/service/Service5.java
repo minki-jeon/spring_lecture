@@ -5,7 +5,11 @@ import com.example.spring.entity.Entity20;
 import com.example.spring.repository.Entity16Repository;
 import com.example.spring.repository.Entity18Repository;
 import com.example.spring.repository.Entity20Repository;
-import jakarta.transaction.Transactional;
+
+//* 동일한 Transactional library지만 통일성을 위해 springframework import
+//import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -127,4 +131,52 @@ public class Service5 {
     public void action11(String country) {
         entity18Repository.deleteAllByCountry(country);
     }
+
+    @Transactional
+    public void action12(String country) {
+        // update, delete, insert
+
+        // rollback 동작
+        // throw new RuntimeException();
+
+        // update, delete, insert
+
+    }
+    @Transactional
+    public void action13(String country) {
+        // update, delete, insert
+
+        // rollback 동작하지 않음 (checked exception)
+        // throw new Exception();
+
+        // update, delete, insert
+
+    }
+    @Transactional
+    public void action14(String country) {
+        // update, delete, insert
+
+        // rollback 동작하지 않음
+        // throw new Exception();
+        if (true) {
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                // rollback
+                throw new RuntimeException(e);
+            }
+        }
+
+        try {
+            throw new Exception();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        // update, delete, insert
+
+    }
+
+
+
 }
