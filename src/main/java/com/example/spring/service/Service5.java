@@ -1,8 +1,11 @@
 package com.example.spring.service;
 
 import com.example.spring.entity.Entity16;
+import com.example.spring.entity.Entity20;
 import com.example.spring.repository.Entity16Repository;
-import com.example.spring.repository.Entity19Repository;
+import com.example.spring.repository.Entity18Repository;
+import com.example.spring.repository.Entity20Repository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +19,8 @@ import java.util.List;
 public class Service5 {
 
     private final Entity16Repository entity16Repository;
+    private final Entity20Repository entity20Repository;
+    private final Entity18Repository entity18Repository;
 
     // Paging
     public void action1(Integer page) {
@@ -54,5 +59,72 @@ public class Service5 {
         List<Entity16> content = pageContent.getContent();
         content.forEach(System.out::println);
 
+    }
+
+    // Jpa에서 기본 제공하는 메소드는 내부에서 Transactional 적용되어 있다.
+    public void action5(Integer id) {
+        entity16Repository.deleteById(id);
+    }
+    // 기본 제공하는 메소드가 아닌 커스텀 Query Method는 직접 Transactional 적용해야한다.
+    @Transactional
+    public void action6(String country) {
+        entity16Repository.deleteByCountry(country);
+    }
+
+    public void action7() {
+        Entity20 a = entity20Repository.findById("a").get();
+        Entity20 b = entity20Repository.findById("b").get();
+
+        a.setMoney(a.getMoney() - 500);
+        entity20Repository.save(a);
+
+        if (true) {
+            // 강제 exception
+            throw new RuntimeException("네트워크 오류");
+        }
+
+        b.setMoney(b.getMoney() + 500);
+        entity20Repository.save(b);
+    }
+
+    @Transactional
+    public void action8() {
+        // 보통 service에서 하나의 메소드가 하나의 Transaction을 의미
+        // -> @Transactional 어노테이션을 service의 모든 메소드에 붙여야한다.
+
+        Entity20 a = entity20Repository.findById("a").get();
+        Entity20 b = entity20Repository.findById("b").get();
+
+        a.setMoney(a.getMoney() - 500);
+        entity20Repository.save(a);
+
+        if (true) {
+            // 강제 exception
+            throw new RuntimeException("네트워크 오류");
+            // Transactional에 의해 Rollback 동작
+        }
+
+        b.setMoney(b.getMoney() + 500);
+        entity20Repository.save(b);
+    }
+
+    @Transactional
+    public void action9(String country) {
+        entity18Repository.deleteByCountry(country);
+
+    }
+    @Transactional
+    public void action10(String country) {
+        // select 실행 후 하나씩 삭제 : 성능 저하 이슈
+//        entity18Repository.deleteByCountry(country);
+
+        // -> jpql 또는 sql로 직접 작성해서 삭제
+        entity16Repository.bulkDeleteByCountry(country);
+
+    }
+
+    @Transactional
+    public void action11(String country) {
+        entity18Repository.deleteAllByCountry(country);
     }
 }
