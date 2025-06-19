@@ -1,16 +1,22 @@
 package com.example.spring.service;
 
+import com.example.spring.dto.Entity36Dto;
+import com.example.spring.dto.Entity39Dto;
+import com.example.spring.dto.ProductInfo;
 import com.example.spring.entity.Entity34;
 import com.example.spring.entity.Entity35;
 import com.example.spring.entity.Entity36;
+import com.example.spring.entity.Entity39;
 import com.example.spring.repository.Entity34Repository;
 import com.example.spring.repository.Entity35Repository;
 import com.example.spring.repository.Entity36Repository;
+import com.example.spring.repository.Entity39Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +26,7 @@ public class Service8 {
     private final Entity34Repository entity34Repository;
     private final Entity35Repository entity35Repository;
     private final Entity36Repository entity36Repository;
+    private final Entity39Repository entity39Repository;
 
 
     public void action1() {
@@ -130,5 +137,65 @@ public class Service8 {
         // 3번 강의 삭제(참조키로 사용되어지고 있는 수강 정보를 먼저 삭제)
         entity36Repository.deleteByLectureId(3);
         entity35Repository.deleteById(3);
+    }
+
+    public void action7() {
+        Entity36 l1 = entity36Repository.findById(1).get();
+        System.out.println(l1.getRegisteredAt());   // my_table36 조회
+
+        Entity34 s1 = l1.getStudent();              // my_table34를 아직 조회하지 않는다.
+        // LAZY일 경우 이 때 SELECT my_table34 쿼리 실행
+        String name = s1.getName();
+        System.out.println("name = " + name);
+
+    }
+
+    public Entity36 action8() {
+        Entity36 l1 = entity36Repository.findById(1).get();
+
+        return l1;
+
+    }
+
+    public Entity36Dto action9() {
+        Entity36 l1 = entity36Repository.findById(1).get();
+        // Entity를 리턴하지 않도록 한다.
+        // -> DTO로 값을 옮겨담아 리턴하도록 한다.
+        Entity36Dto d1 = new Entity36Dto();
+        d1.setRegisteredAt(l1.getRegisteredAt());
+        d1.setStudentName(l1.getStudent().getName());
+
+        return d1;
+
+    }
+
+
+    public void action10() {
+        // t39(product), t40(category)
+        // 상품번호, 상품명, 가격, 카테고리명
+        List<Entity39> list = entity39Repository.findAll();
+
+        List<Entity39Dto> result = new ArrayList<>();
+        for (Entity39 entity39 : list) {
+            Entity39Dto d = new Entity39Dto();
+            d.setId(entity39.getId());
+            d.setName(entity39.getName());
+            d.setPrice(entity39.getPrice());
+            d.setCategoryName(entity39.getCategory().getName());
+            result.add(d);
+        }
+
+    }
+
+    public List<ProductInfo> action11() {
+        // t39(product), t40(category)
+        // 상품번호, 상품명, 가격, 카테고리명
+        /*
+        SELECT p.id, p.name product_name, p.price, c.name category_name
+        FROM t39 p JOIN t40 c p.category_id = c.id
+         */
+        List<ProductInfo> list = entity39Repository.query1();
+
+        return list;
     }
 }
