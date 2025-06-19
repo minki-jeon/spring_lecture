@@ -25,7 +25,7 @@ public class Entity21 {
     @Column(name = "address", length = 20)
     private String address;
 
-    // insertable=false, updatable=false : 해당 Column을 insert/false를 jpa에서 동작처리하지 않는다. DB에서 처리하도록 되므로
+    // insertable=false, updatable=false : DB에서 자동 처리되는 컬럼 명시, 해당 컬럼은 Insert/Update 할 때 jpa에서 처리하지 않는다. (PK는 별개)
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "inserted_at", nullable = false, insertable = false, updatable = false)
     private LocalDateTime insertedAt;
