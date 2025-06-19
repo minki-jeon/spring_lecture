@@ -3,11 +3,13 @@ package com.example.spring.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "my_table41", schema = "jpa")
 public class Entity41 {
@@ -19,7 +21,7 @@ public class Entity41 {
     @Column(name = "order_date")
     private LocalDate orderDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Entity39 product;
 
