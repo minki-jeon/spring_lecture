@@ -98,4 +98,30 @@ public class Service9 {
             }
         }
     }
+
+    public void action4(MultipartFile[] upload) {
+
+        if (upload != null) {
+            for (MultipartFile file : upload) {
+                if (file.getSize() > 0) {
+                    try {
+                        String filePath = "D:/01.private_work/Choongang/workspaces/Temp/uploadFiles/" + file.getOriginalFilename();
+
+                        BufferedInputStream bis = new BufferedInputStream(file.getInputStream());               // read
+                        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));    // write
+                        try (bos; bis) {
+                            byte[] buffer = new byte[1024];
+                            int length;
+                            while ((length = bis.read(buffer)) != -1) {
+                                bos.write(buffer, 0, length);
+                            }
+                            bos.flush();
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+    }
 }

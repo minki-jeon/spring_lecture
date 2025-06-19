@@ -9,6 +9,12 @@
     파일 업로드 예제
 </h3>
 
+<form th:action="@{/main27/sub4}" method="post" enctype="multipart/form-data">
+    <input type="file" name="upload" accept="image/*" multiple>
+</form>
+
+<hr>
+
 <form th:action="@{/main27/sub3}" method="post" enctype="multipart/form-data">
     <!-- accept="image/*" : image 파일만 -->
     <!-- multiple : 여러 개의 파일 input   -->

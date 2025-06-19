@@ -44,4 +44,10 @@ public class Controller27 {
         service9.action3(upload);
         return "redirect:/main27/sub1";
     }
+
+    @PostMapping("sub4")
+    public String post4(MultipartFile[] upload) {
+        service9.action4(upload);
+        return "redirect:/main27/sub1";
+    }
 }
