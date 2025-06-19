@@ -1,6 +1,7 @@
 package com.example.spring.controller;
 
 import com.example.spring.dto.Entity36Dto;
+import com.example.spring.dto.OrderInfo;
 import com.example.spring.dto.ProductInfo;
 import com.example.spring.entity.Entity34;
 import com.example.spring.entity.Entity36;
@@ -113,5 +114,21 @@ public class Controller26 {
         }
 
         return "main26/sub11";
+    }
+
+    @RequestMapping("sub12")
+    public String sub12() {
+        List<OrderInfo> result = service8.action12();
+
+        for (OrderInfo orderInfo : result) {
+            System.out.println("orderInfo = " + orderInfo.getOrderDate());
+            System.out.println("orderInfo = " + orderInfo.getProductName());
+            System.out.println("orderInfo = " + orderInfo.getPrice());
+            System.out.println("orderInfo = " + orderInfo.getQuantity());
+            System.out.println("orderInfo = " + orderInfo.getCategoryName());
+            System.out.println("--------------------------------------------");
+        }
+
+        return "main26/sub12";
     }
 }

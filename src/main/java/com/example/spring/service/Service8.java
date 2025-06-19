@@ -2,15 +2,13 @@ package com.example.spring.service;
 
 import com.example.spring.dto.Entity36Dto;
 import com.example.spring.dto.Entity39Dto;
+import com.example.spring.dto.OrderInfo;
 import com.example.spring.dto.ProductInfo;
 import com.example.spring.entity.Entity34;
 import com.example.spring.entity.Entity35;
 import com.example.spring.entity.Entity36;
 import com.example.spring.entity.Entity39;
-import com.example.spring.repository.Entity34Repository;
-import com.example.spring.repository.Entity35Repository;
-import com.example.spring.repository.Entity36Repository;
-import com.example.spring.repository.Entity39Repository;
+import com.example.spring.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +25,7 @@ public class Service8 {
     private final Entity35Repository entity35Repository;
     private final Entity36Repository entity36Repository;
     private final Entity39Repository entity39Repository;
+    private final Entity41Repository entity41Repository;
 
 
     public void action1() {
@@ -197,5 +196,11 @@ public class Service8 {
         List<ProductInfo> list = entity39Repository.query1();
 
         return list;
+    }
+
+    public List<OrderInfo> action12() {
+        List<OrderInfo> result = entity41Repository.query1();
+
+        return result;
     }
 }
