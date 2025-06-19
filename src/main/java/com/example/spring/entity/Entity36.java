@@ -29,13 +29,15 @@ public class Entity36 {
     private String money;
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @ManyToOne
+//    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "student_id", nullable = false)
     @JoinColumn
     private Entity34 student;
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @ManyToOne
+//    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "lecture_id", nullable = false)
     @JoinColumn
     private Entity35 lecture;
