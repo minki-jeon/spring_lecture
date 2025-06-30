@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 배열 복사
+  const a = [3, 5, 7, -9, -1, 2];
+  const b = a;    // 참조값 복사
+  b[0] = -3;
+  console.log(b);
+  console.log(a);
+
+  // 같은 값을 가진 새 배열로 복사
+  // map() 사용하지 않는 방법
+  const c = a.map(e => e);
+  c[0] = 33;
+  console.log(c);
+  console.log(b);
+
+  // slice() 거의 사용하지 않는 방법
+  const d = a.slice(0, a.length);
+  d[0] = 333;
+  console.log(d);
+  console.log(a);
+
+  // for 거의 사용하지 않는 방법
+  const e = [];
+  for (const item of a) {
+    e.push(item);
+  }
+  e[0] = 3333;
+  console.log(e);
+  console.log(a);
+
+  // spread 연산자, 주로 사용되는 방법
+  const f = [...a];
+  f[0] = -33;
+  console.log(f);
+  console.log(a);
+
+
+  //
+  const g = [6, 7, 8];
+  const h = [...g];
+  const i = [...g, 1];  // 6, 7, 8, 1
+  const j = [2, ...g];  // 2, 6, 7, 8
+  console.log(g);
+  console.log(h);
+  console.log(i);
+  console.log(j);
+
+  const k = ["css", "react", "vue"];
+  const l = [...k];  // css, react, vue
+  const m = ["java", k];  // java, css, react, vue
+  const n = [k, "spring"];  // css, react, vue, spring
+  console.log(l);
+  console.log(m);
+  console.log(n);
+
+
+
+</script>
+</body>
+</html>
