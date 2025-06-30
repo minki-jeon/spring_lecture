@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // destructuring assignment : (구조)분해 할당
+  const a = [10, 30, 50];
+  const b = a[0];
+  const c = a[1];
+  const d = a[2];
+  console.log(b, c, d);
+
+  const [e, f, g] = a;
+  console.log(e);   // 10
+  console.log(f);   // 30
+  console.log(g);   // 50
+
+  const h = ["java", "boot", "react"];
+  const [i, j, k] = h;
+  console.log(i, j, k);   // java boot react
+
+  const [l, m] = k;
+  console.log(l, m);      // java boot
+
+  const n = {name: "park", address: "강남", city: "서울", country: "한국"};
+  const name = n.name;
+  const address = n.address;
+  console.log(name);
+  console.log(address);
+
+  const {city, country} = n;
+  console.log(city);
+  console.log(country);
+
+  // const {name, address} = n;   이미 선언된 변수
+  // console.log(name);
+  // console.log(address);
+
+
+  const o = {score: 99.11, nick: "trump", skill: "java"};
+  const {score, nick, skill} = o;
+  console.log(score);
+  console.log(nick);
+  console.log(skill);
+
+
+
+</script>
+</body>
+</html>
