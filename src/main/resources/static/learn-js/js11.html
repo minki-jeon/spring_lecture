@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // spread 연산자로 객체, 배열을 복사
+  // 얕은 복사
+  const a = [4, 2, 1];
+  const b = [...a];
+  b[0] = 44;
+  console.log(b);   // [44, 2, 1]
+  console.log(a);   // [4, 2, 1]
+  // 문제 있는 코드
+  const c = [[2, 3], [0, 1], [5, 6]];
+  const d = [...c];
+  d[0][0] = 22;
+  console.log(d);   // [[22, 3], [0, 1], [5, 6]]
+  console.log(c);   // [[22, 3], [0, 1], [5, 6]]
+
+  // 깊은 복사
+  // spread연산자, 잘 사용되지 않는 방법
+  const e = [[...c[0]], [...c[1]], [...c[2]]];
+  e[0][0] = 222;
+  console.log(e);
+  console.log(c);
+
+  // for, 잘 사용되지 않는 방법
+  const f = []
+  for (const item of c) {
+    f.push([...item]);
+  }
+  f[0][0] = -222;
+  console.log(f);
+  console.log(c);
+
+  // JSON 으로 바꾸고 객체(배열)로 파싱, 자주 사용되는 방법
+  const g = JSON.parse(JSON.stringify(c));
+  g[0][0] = -333;
+  console.log(g);
+  console.log(c);
+
+  // structuredClone() :
+  // Brand New(최근에 나온 신기술), 곧 자주 쓰이게 될 예정
+  const h = structuredClone(c);
+  h[0][0] = -55;
+  console.log(h);
+  console.log(c);
+
+  const i = [[9, 1], ["spring", "css"], "java"];
+  const j = structuredClone(i);
+  console.log(j);   // [[9, 1], ["spring", "css"], "java"]
+
+  j[1][0] = "boot";
+  console.log(j);   // [[9, 1], ["boot", "css"], "java"]
+  console.log(i);   // [[9, 1], ["spring", css"], "java"]
+
+</script>
+
+</body>
+</html>
