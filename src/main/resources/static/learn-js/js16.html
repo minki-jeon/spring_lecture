@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 분해할당과 함수 파라미터
+  function action1(param) {
+    const name = param.name;
+    const address = param.address;
+
+    console.log(name);
+    console.log(address);
+  }
+
+  action1({name: "son", address: "seoul"});
+  action1({name: "kim", address: "kullan"});
+
+  function action2({name, address}) {
+    console.log(name);
+    console.log(address);
+  }
+
+  action2({name: "tai", address: "seoul"});
+  action2({name: "taoba", address: "busan"});
+
+  function action3({name, address = "jeju"}) {
+    console.log(name);
+    console.log(address);
+  }
+  action3({name: "lee", address: "dokdo"});
+  action3({name: "park"});
+
+  function action4({score = 0, skill}) {
+    console.log(score);
+    console.log(skill);
+  }
+  action4({score: 33, skill: "java"});  // 33, java
+  action4({skill: "react"});            // 0, react
+
+  const a = {score: 99, skill: "spring"};
+  action4(a);
+
+
+
+</script>
+</body>
+</html>
