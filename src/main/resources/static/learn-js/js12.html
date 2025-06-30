@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 객체 복사
+  // 얕은 복사
+  const a = {
+    name: "son",
+    age: 44,
+    address: {
+      city: "london",
+      country: "uk"
+    }
+  };
+  const b = {...a};
+  console.log(b);
+  b.name = "kim";
+  console.log(b);   // name:"kim"
+  console.log(a);   // name:"son"
+  b.address.city = "seoul";
+  console.log(b);   // city:"seoul"
+  console.log(a);   // city:"seoul"
+
+  // 깊은 복사
+  const c = {
+    name: "kim",
+    address: {
+      city: "seoul",
+      country: "korea"
+    }
+  };
+
+  // spread 연산자, 간혹 사용되는 방법
+  const d = {...c, address: {...c.address}};
+  d.address.city = "jeju";
+  console.log(c);   // city:"seoul"
+
+  // JSON -> 파싱, 자주 사용되는 방법
+  const e = JSON.parse(JSON.stringfy(c));
+  e.address.city = "dokdo";
+  console.log(c);   // city:"seoul"
+
+  // structuredClone(): 현재까지는 많이 사용되지 않는 방법, 최근 나온 기술
+  const f = structuredClone(c);
+  f.address.city = "busan";
+  console.log(f);   // city:"busan"
+  console.log(c);   // city:"seoul"
+
+  const g = {
+    score: {
+      math: 99.11,
+      english: 88.22,
+      korean: 77.33
+    },
+    className: "중앙"
+  };
+  // const h = g;  // 참조값 복사
+  // const h = {...g}; // 얕은 복사
+  const h = structuredClone(g); // 깊은 복사
+  console.log(h);
+  console.log(g);
+
+
+</script>
+</body>
+</html>
