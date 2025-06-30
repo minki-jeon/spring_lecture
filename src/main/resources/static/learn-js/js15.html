@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 분해 할당
+  const a = {name: "kim", age: 33, country: "korea"};
+  const {name, age, country} = a;
+  console.log(name);
+  console.log(age);
+  console.log(country);
+
+  // 변수명 지정
+  const {name: otherName, age: yourAge} = a;
+  // const otherName = a.name;
+  // const yourAge = a.age;
+  console.log(otherName);
+  console.log(yourAge);
+
+  const {name: myName, age: ourAge} = a;
+  console.log(myName);
+  console.log(ourAge);
+
+  // 기본값 지정
+  const b = {address: "seoul", city: "강남"};
+  const {address, city = "신촌", product = "apple"} = b;
+  console.log(address);   // seoul
+  console.log(city);      // 강남
+  console.log(product);   // apple
+
+  const d = {birth: "98-10-12", married: true, team: "korea"};
+  const {birth, company = "tesla"} = d;
+  console.log(birth);
+  console.log(company);
+
+
+
+
+
+</script>
+</body>
+</html>
