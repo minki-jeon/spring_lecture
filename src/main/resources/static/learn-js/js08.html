@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 객체
+  // {} : 객체
+  // ( 속성명 : 속성값 )
+  const a = {};
+  const b = {address: "seoul", age: 55};
+  console.log(b);
+  b.age = 77;
+  b.address = "jeju";
+  console.log(b);
+
+  const c = b;
+  console.log(c);
+  c.age = 99;
+  console.log(c);
+  console.log(b);
+
+  const d = {name: "son", number: 7}
+  const e = d;
+  e.name = "lee";
+  console.log(d.name);      // lee
+
+  const f = {name: "kim", number: 13};
+  f.name = d.name;
+  f.number = d.number;
+
+  d.name = "park"
+  console.log(f.name);    // lee
+
+
+  const g = {numbers: [2, 3], name: "choi"}
+  const h = {numbers: [], name: "park"}
+  h.numbers = g.numbers;
+  h.name = g.name;
+
+  g.name = "kim";
+  console.log(h.name);
+  g.numbers[0] = 22;
+  console.log(h.numbers);   // [22, 3]
+
+
+
+</script>
+</body>
+</html>
