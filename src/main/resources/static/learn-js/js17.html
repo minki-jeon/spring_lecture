@@ -9,7 +9,7 @@
   // 단락평가(short circuit evaluation)
 
   // && : 두 항이 모두 true일 때 true
-  // 첫 항이 true이면 두번째 항 연산 진행 (두번째 항 연산 결과가 최종 결과)
+  // 첫 항이 true이면 두번째 항 연산 진행 (두번째 항 연산 결과가 최종 결과 = if than)
   // 첫 항이 false이면 두번째 항 연산 진행 하지 않음
 
   let a = 10;
@@ -24,7 +24,7 @@
   // b++ 연산을 진행하지 않음
   let r3 = (a++) < 0 && "hello";
   console.log(r3);  // false
-  let r4 = (a++) > 0 && "hi";
+  let r4 = (a++) > 0 && "hi";   // if than
   console.log(r4);  // "hi"
 
 
@@ -34,7 +34,7 @@
   let c = 5;
   let r5 = c > 0 || "hi";
   console.log(r5);      // true
-  let r6 = c < 0 || "hello";
+  let r6 = c < 0 || "hello";    // if not
   console.log(r6);      // "hello"
 
 
