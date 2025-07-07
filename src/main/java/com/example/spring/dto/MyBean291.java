@@ -11,5 +11,5 @@ public class MyBean291 {
     Map<String, Object> team;
     Integer age;
     Boolean married;
-    List address;
+    List<String> address;
 }
