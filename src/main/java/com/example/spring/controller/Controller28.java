@@ -21,4 +21,17 @@ public class Controller28 {
         System.out.println("Controller28.sub2");
         return null;
     }
+
+    @GetMapping("sub3")
+    public String sub3() {
+        System.out.println("Controller28.sub3");
+
+        return null;
+    }
+
+    @PostMapping("sub4")
+    public String sub4() {
+        System.out.println("Controller28.sub4");
+        return null;
+    }
 }
