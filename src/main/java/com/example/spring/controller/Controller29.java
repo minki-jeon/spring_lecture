@@ -1,5 +1,7 @@
 package com.example.spring.controller;
 
+import com.example.spring.dto.MyBean291;
+import com.example.spring.dto.MyBean292;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -137,6 +139,28 @@ public class Controller29 {
     @PostMapping("sub12")
     public String sub12(@RequestBody List<Object> data) {
         System.out.println(data);
+
+        return null;
+    }
+
+    @PostMapping("sub13")
+    public String sub13(@RequestBody MyBean291 dto) {
+        System.out.println(dto.getNickName());
+        System.out.println(dto.getAge());
+        System.out.println(dto.getMarried());
+        System.out.println(dto.getAddress());
+        System.out.println(dto.getTeam());
+
+        return null;
+    }
+
+    @PostMapping("sub14")
+    public String sub14(@RequestBody MyBean292 dto) {
+        System.out.println(dto.getPerson());
+        System.out.println(dto.getCity());
+        System.out.println(dto.getScore());
+        System.out.println(dto.getChecked());
+        System.out.println(dto.getFruits());
 
         return null;
     }
