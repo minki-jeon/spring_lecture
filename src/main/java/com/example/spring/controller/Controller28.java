@@ -106,4 +106,22 @@ public class Controller28 {
         System.out.println();
         return null;
     }
+
+    @GetMapping("sub15")
+    public String sub15(String name, Integer age, String country) {
+        System.out.println("name = " + name);
+        System.out.println("age = " + age);
+        System.out.println("country = " + country);
+        System.out.println();
+        return null;
+    }
+
+    @GetMapping("sub16")
+    public String sub16(String fruit, Integer price, String location) {
+        System.out.println("fruit = " + fruit);
+        System.out.println("price = " + price);
+        System.out.println("location = " + location);
+        System.out.println();
+        return null;
+    }
 }
